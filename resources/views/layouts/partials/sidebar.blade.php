@@ -43,13 +43,86 @@
                     </p>
                 </a>
             </li>
+            <hr style="width:200px;background: rgb(111, 111, 111);">
+            <li class="nav-item">
+                <a href="{{ route('attendees') }}" class="nav-link {{ request()->is('attendees') ? 'active' : '' }} ">
+                    <i class="nav-icon fas fa-solid fa-fingerprint"></i>
+                    <p>
+                    Attendees
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('attendees') }}" class="nav-link {{ request()->is('attendees') ? 'active' : '' }} ">
+                    <i class="nav-icon fas fa-solid fa-sack-dollar"></i>
+                    <p>
+                    Discount
+                    </p>
+                </a>
+            </li>
+            <hr style="width:200px;background: rgb(111, 111, 111);">
             <li class="nav-item">
                 <a href="{{ route('employees') }}" class="nav-link {{ request()->is('employees') ? 'active' : '' }} ">
-                    <i class="nav-icon fas fa-users"></i>
+                    <i class="nav-icon fas fa-id-card"></i>
                     <p>
                     Employees
                     </p>
                 </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('vacancies') }}" class="nav-link {{ request()->is('vacancies') ? 'active' : '' }} ">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>
+                    Positions
+                    </p>
+                </a>
+            </li>
+            <hr style="width:200px;background: rgb(111, 111, 111);">
+            <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="nav-icon fa-solid fa-door-open"></i>
+                  <p>
+                    Vacations
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-calendar nav-icon"></i>
+                      <p>Daily</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-clock nav-icon"></i>
+                      <p>Hourly</p>
+                    </a>
+                  </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="nav-icon fas fa-walkie-talkie"></i>
+                  <p>
+                    Tasks
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-calendar nav-icon"></i>
+                      <p>Daily</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-clock nav-icon"></i>
+                      <p>Hourly</p>
+                    </a>
+                  </li>
+                </ul>
             </li>
         </ul>
       </nav>

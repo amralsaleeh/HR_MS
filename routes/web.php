@@ -18,3 +18,6 @@ use App\Http\Controllers\AdminController;
 Route::get('/', AdminController::class)->name('dashboard');
 Route::get('dashboard', AdminController::class)->name('dashboard');
 Route::get('employees', EmployeesList::class)->name('employees');
+Route::get('vacancies', EmployeesList::class)->name('vacancies');
+
+Route::get('attendees', EmployeesList::class)->name('attendees');

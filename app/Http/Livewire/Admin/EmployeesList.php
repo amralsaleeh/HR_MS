@@ -4,10 +4,15 @@ namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
 use App\Models\Employee;
+use Livewire\WithPagination;
 use Illuminate\Support\Facades\Validator;
 
 class EmployeesList extends Component
 {
+    use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
+
     public $employee;
     public $perInfo=[];
     public $showEditEmployerForm = false;
@@ -15,7 +20,7 @@ class EmployeesList extends Component
 
     public function render()
     {
-        $employees = Employee::paginate();
+        $employees = Employee::paginate(10);
 
         return view('livewire.admin.employees-list', [
             'employees' => $employees,

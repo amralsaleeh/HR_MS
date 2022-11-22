@@ -29,39 +29,41 @@
             <div class="col-lg-12">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                    <div class="d-flex justify-content-end">
-                        <button wire:click.prevent="show_new_employer_form" class="btn btn-primary">
-                            <i class="fa fa-plus-circle mr-2"></i> Add New Employer
-                        </button>
-                    </div>
+                        <div class="d-flex justify-content-end">
+                            <button wire:click.prevent="show_new_employer_form" class="btn btn-primary">
+                                <i class="fa fa-plus-circle mr-2"></i> Add New Employer
+                            </button>
+                        </div>
                     </div>
                     <div class="card-body">
 
-                    <table class="table table-hover">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Last Name</th>
-                            <th scope="col">Phone Number</th>
-                            <th scope="col">Options</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($employees as $employee)
-                                <tr>
-                                    <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>{{ @$employee->firstName }}</td>
-                                    <td>{{ @$employee->lastName }}</td>
-                                    <td>{{ @$employee->phoneNumber }}</td>
-                                    <td>
-                                        <a wire:click.prevent="show_edit_employer_form( {{ $employee }} )" href=""><i class="fa fa-edit mr-2"></i></a>
-                                        <a wire:click.prevent="show_conformation_model( {{ $employee->id }} )" href=""><i class="fa fa-trash text-danger"></i></a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Phone Number</th>
+                                <th scope="col">Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($employees as $employee)
+                                    <tr>
+                                        <td>{{ @$employee->firstName }}</td>
+                                        <td>{{ @$employee->lastName }}</td>
+                                        <td>{{ @$employee->phoneNumber }}</td>
+                                        <td>
+                                            <a wire:click.prevent="show_edit_employer_form( {{ $employee }} )" href=""><i class="fa fa-edit mr-2"></i></a>
+                                            <a wire:click.prevent="show_conformation_model( {{ $employee->id }} )" href=""><i class="fa fa-trash text-danger"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card-footer d-flex justify-content-center">
+                        {{ $employees->links() }}
                     </div>
                 </div>
             </div>
@@ -69,6 +71,7 @@
         </div>
     </div>
 
+    {{-- Employer form --}}
     <div wire:ignore.self class="modal fade" id="employer-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
         <form wire:submit.prevent="{{ $showEditEmployerForm ? 'edit_employer' : 'new_employer' }}" autocomplete="off">
@@ -131,6 +134,7 @@
         </div>
     </div>
 
+    {{-- Conformation model --}}
     <div wire:ignore.self class="modal fade" id="conformation-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
