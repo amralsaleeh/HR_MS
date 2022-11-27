@@ -17,7 +17,18 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/', AdminController::class)->name('dashboard');
 Route::get('dashboard', AdminController::class)->name('dashboard');
-Route::get('employees', EmployeesList::class)->name('employees');
-Route::get('vacancies', EmployeesList::class)->name('vacancies');
 
 Route::get('attendees', EmployeesList::class)->name('attendees');
+Route::get('discount', EmployeesList::class)->name('discount');
+
+Route::get('employees', EmployeesList::class)->name('employees');
+Route::get('positions', EmployeesList::class)->name('positions');
+
+Route::get('vacationsDaily', EmployeesList::class)->name('vacationsDaily');
+Route::get('vacationsHourly', EmployeesList::class)->name('vacationsHourly');
+
+Route::get('tasksDaily', EmployeesList::class)->name('tasksDaily');
+Route::get('tasksHourly', EmployeesList::class)->name('tasksHourly');
+
+Route::get('tasks', EmployeesList::class)->name('tasks');
+
