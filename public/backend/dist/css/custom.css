@@ -1,9 +1,7 @@
 /* ------------------
 Sidebar
 ------------------ */
-.wrapper {
-  position: static;
-}
-body:not(.layout-fixed) .main-sidebar {
-  position: fixed;
+.nav.nav-treeview
+{
+  margin-left: 20px;
 }

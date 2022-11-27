@@ -53,7 +53,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('attendees') }}" class="nav-link {{ request()->is('attendees') ? 'active' : '' }} ">
+                <a href="{{ route('discount') }}" class="nav-link {{ request()->is('discount') ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-solid fa-sack-dollar"></i>
                     <p>
                     Discount
@@ -70,7 +70,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('vacancies') }}" class="nav-link {{ request()->is('vacancies') ? 'active' : '' }} ">
+                <a href="{{ route('positions') }}" class="nav-link {{ request()->is('positions') ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-users"></i>
                     <p>
                     Positions
@@ -79,22 +79,22 @@
             </li>
             <hr style="width:200px;background: rgb(111, 111, 111);">
             <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="" class="nav-link {{ request()->is('vacationsDaily') ? 'active' : '' }} {{ request()->is('vacationsHourly') ? 'active' : '' }}">
                   <i class="nav-icon fa-solid fa-door-open"></i>
                   <p>
                     Vacations
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
+                <ul class="nav nav-treeview" >
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('vacationsDaily') }}" class="nav-link {{ request()->is('vacationsDaily') ? 'active' : '' }} ">
                       <i class="far fa-calendar nav-icon"></i>
                       <p>Daily</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('vacationsHourly') }}" class="nav-link {{ request()->is('vacationsHourly') ? 'active' : '' }} ">
                       <i class="far fa-clock nav-icon"></i>
                       <p>Hourly</p>
                     </a>
@@ -102,7 +102,7 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="" class="nav-link  {{ request()->is('tasksDaily') ? 'active' : '' }} {{ request()->is('tasksHourly') ? 'active' : '' }}">
                   <i class="nav-icon fas fa-walkie-talkie"></i>
                   <p>
                     Tasks
@@ -111,13 +111,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('tasksDaily') }}" class="nav-link {{ request()->is('tasksDaily') ? 'active' : '' }} ">
                       <i class="far fa-calendar nav-icon"></i>
                       <p>Daily</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('tasksHourly') }}" class="nav-link {{ request()->is('tasksHourly') ? 'active' : '' }} ">
                       <i class="far fa-clock nav-icon"></i>
                       <p>Hourly</p>
                     </a>

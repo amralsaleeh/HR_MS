@@ -20,6 +20,11 @@
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
+  <!-- Preloader -->
+    <div class="preloader">
+      <img src="{{ asset ('backend/dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60" width="60">
+    </div>
+
   <!-- Navbar -->
     @include('layouts.partials.navbar')
 

@@ -37,9 +37,14 @@ class EmployeesList extends Component
     public function new_employer()
     {
         $validatedData =  Validator::make($this->perInfo, [
-            'firstName' => 'required',
-            'lastName' => 'required',
-            'phoneNumber' => 'required|unique:employees',
+            'nationalnumber' => 'required|unique:employees',
+            'fullname' => 'required',
+            'birthdate' => 'required',
+            'positionid' => 'required',
+            'departmentid' => 'required',
+            'centerid' => 'required',
+            'startdate' => 'required',
+            'phonenumber' => 'required|unique:employees',
         ])-> validate();
 
         // $validatedData['password'] = bcrypt($validatedData['password']);
@@ -61,9 +66,14 @@ class EmployeesList extends Component
     public function edit_employer()
     {
         $validatedData =  Validator::make($this->perInfo, [
-            'firstName' => 'required',
-            'lastName' => 'required',
-            'phoneNumber' => 'required|unique:employees,phoneNumber,'.$this->employee->id,
+            'nationalnumber' => 'required|unique:employees,phoneNumber,'.$this->employee->id,
+            'fullname' => 'required',
+            'birthdate' => 'required',
+            'positionid' => 'required',
+            'departmentid' => 'required',
+            'centerid' => 'required',
+            'startdate' => 'required',
+            'phonenumber' => 'required|unique:employees,phoneNumber,'.$this->employee->id,
         ])-> validate();
 
         $this->employee->update($validatedData);
