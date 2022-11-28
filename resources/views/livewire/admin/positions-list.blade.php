@@ -33,6 +33,8 @@
                             <thead>
                             <tr>
                                 <th scope="col">ID</th>
+                                <th scope="col">Center</th>
+                                <th scope="col">Department</th>
                                 <th scope="col">Position</th>
                                 <th scope="col">Employee</th>
                                 <th scope="col">Options</th>
@@ -42,8 +44,9 @@
                                 @foreach ($positions as $position)
                                     <tr>
                                         <td>{{ @$position->id }}</td>
+                                        <td> center </td>
+                                        <td> department </td>
                                         <td>{{ @$position->positionname }}</td>
-
                                         <td>{{ @$position->fullname }}</td>
 
                                         <td>
