@@ -3,12 +3,12 @@
         <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-            <h1 class="m-0">Employees</h1>
+            <h1 class="m-0">Positions</h1>
             </div>
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
-                <li class="breadcrumb-item active">Employees</li>
+                <li class="breadcrumb-item active">Positions</li>
             </ol>
             </div>
         </div>
@@ -33,11 +33,8 @@
                             <thead>
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">National number</th>
                                 <th scope="col">Full name</th>
-                                <th scope="col">Birth date</th>
-                                <th scope="col">Start date</th>
-                                <th scope="col">Phone number</th>
+                                <th scope="col">Remaining days</th>
                                 <th scope="col">Options</th>
                             </tr>
                             </thead>
@@ -45,14 +42,10 @@
                                 @foreach ($employees as $employee)
                                     <tr>
                                         <td>{{ @$employee->id }}</td>
-                                        <td>{{ @$employee->nationalnumber }}</td>
                                         <td>{{ @$employee->fullname }}</td>
-                                        <td>{{ @$employee->birthdate }}</td>
-                                        <td>{{ @$employee->startdate }}</td>
-                                        <td>+963-{{ @$employee->phonenumber }}</td>
+                                        <td> 5 </td>
                                         <td>
-                                            <a wire:click.prevent="show_edit_employer_form( {{ $employee }} )" href=""><i class="fa fa-edit mr-2"></i></a>
-                                            <a wire:click.prevent="show_conformation_model( {{ $employee->id }} )" href=""><i class="fa fa-trash text-danger"></i></a>
+                                            <a wire:click.prevent="show_edit_employer_form( {{ $employee }} )" href=""><i class="fa-solid fa-eye mr-2"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -61,7 +54,7 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-centerid">
-                        {{ $employees->links() }}
+                        {{ $attendees->links() }}
                     </div>
                 </div>
             </div>
@@ -70,7 +63,7 @@
     </div>
 
     {{-- Employer form --}}
-    <div wire:ignore.self class="modal fade" id="employer-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div wire:ignore.self class="modal fade" id="employer-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
         <form wire:submit.prevent="{{ $showEditEmployerForm ? 'edit_employer' : 'new_employer' }}" autocomplete="off">
           <div class="modal-content">
@@ -154,12 +147,6 @@
                             {{ $message }}
                         </div>
                         @enderror
-                        {{-- <input wire:model.defer="perInfo.positionid" type="text" class="form-control @error('positionid') is-invalid @enderror" id="positionid" placeholder="choose positionid">
-                        @error('positionid')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror --}}
                     </div>
                     <div class="form-group col-md-4">
                         <label for="departmentid">Department</label>
@@ -204,10 +191,10 @@
           </div>
         </form>
         </div>
-    </div>
+    </div> --}}
 
     {{-- Conformation model --}}
-    <div wire:ignore.self class="modal fade" id="conformation-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div wire:ignore.self class="modal fade" id="conformation-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -221,9 +208,9 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i>Cancel</button>
-                <button wire:click.prevent="delete_employee( {{ $employee }} )" type="button" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Delete</button>
+                <button wire:click.prevent="delete_position( {{ $position }} )" type="button" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Delete</button>
             </div>
           </div>
         </div>
-    </div>
+    </div> --}}
 </div>
