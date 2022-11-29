@@ -3,11 +3,18 @@
 namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
+use App\Models\Employee;
 
 class DiscountList extends Component
 {
+    public $employee;
+
     public function render()
     {
-        return view('livewire.admin.discount-list');
+        $employees = Employee::paginate(10);
+
+        return view('livewire.admin.discount-list', [
+            'employees' => $employees,
+        ]);
     }
 }

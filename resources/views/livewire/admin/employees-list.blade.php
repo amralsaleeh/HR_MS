@@ -17,6 +17,21 @@
 
     <div class="content">
         <div class="container-fluid">
+        {{-- Boxes --}}
+        <div class="row">
+            <div class="col-lg-12 col-12">
+                <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>150</h3>
+                    <p>All Employee</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-bag"></i>
+                </div>
+                </div>
+            </div>
+        </div>
+        {{-- Main --}}
         <div class="row">
             <div class="col-lg-12">
                 <div class="card card-primary card-outline">

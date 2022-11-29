@@ -4,5 +4,5 @@
     <i class="fa-regular fa-heart"></i>
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2022 <a href="">Technical Department</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2022 <a href="#">Technical Department</a>.</strong> All rights reserved.
 </footer>

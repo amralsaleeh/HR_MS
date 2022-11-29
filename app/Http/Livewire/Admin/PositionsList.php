@@ -18,16 +18,20 @@ class PositionsList extends Component
 
     public function render()
     {
-        $result = DB::table('position')
-               ->crossJoin('employee')
-               ->get();
-
-               dd($result);
-
         $positions = Position::paginate(10);
 
+        // $results = DB::table('position')
+        //     ->join('employee', 'positionid', '=', 'position.id')
+        //     ->get();
+
+        $results = DB::table('employee')
+            ->join('position', 'position.id', '=', 'employee.positionid')
+            ->join('department', 'department.id', '=', 'employee.departmentid')
+            ->join('center', 'center.id', '=', 'employee.centerid')
+            ->get();
+
         return view('livewire.admin.positions-list', [
-            'positions' => $positions,
+            'results' => $results,
         ]);
     }
 }

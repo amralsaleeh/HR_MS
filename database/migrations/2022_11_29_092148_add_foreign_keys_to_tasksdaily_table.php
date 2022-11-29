@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmployeesTable extends Migration
+class AddForeignKeysToTasksdailyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateEmployeesTable extends Migration
      */
     public function up()
     {
-        Schema::create('employees', function (Blueprint $table) {
-            $table->id();
-            $table->string('firstName');
-            $table->string('lastName');
-            $table->string('phoneNumber');
-            $table->timestamps();
+        Schema::table('tasksdaily', function (Blueprint $table) {
+            $table->foreign(['employeeid'], 'FKtasksdaily577353')->references(['id'])->on('employee');
         });
     }
 
@@ -29,6 +25,8 @@ class CreateEmployeesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employees');
+        Schema::table('tasksdaily', function (Blueprint $table) {
+            $table->dropForeign('FKtasksdaily577353');
+        });
     }
 }

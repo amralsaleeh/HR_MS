@@ -17,14 +17,30 @@
 
     <div class="content">
         <div class="container-fluid">
+        {{-- Boxes --}}
+        <div class="row">
+            <div class="col-lg-12 col-12">
+                <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>355</h3>
+
+                    <p>All Positions</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                </div>
+            </div>
+        </div>
+        {{-- Main --}}
         <div class="row">
             <div class="col-lg-12">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
                         <div class="d-flex justify-content-end">
-                            <button wire:click.prevent="show_new_employer_form" class="btn btn-primary">
+                            {{-- <button wire:click.prevent="show_new_employer_form" class="btn btn-primary">
                                 <i class="fa fa-plus-circle mr-2"></i> Add New Employer
-                            </button>
+                            </button> --}}
                         </div>
                     </div>
                     <div class="card-body">
@@ -32,7 +48,6 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th scope="col">ID</th>
                                 <th scope="col">Center</th>
                                 <th scope="col">Department</th>
                                 <th scope="col">Position</th>
@@ -41,17 +56,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach ($positions as $position)
+                                @foreach ($results as $result)
                                     <tr>
-                                        <td>{{ @$position->id }}</td>
-                                        <td> center </td>
-                                        <td> department </td>
-                                        <td>{{ @$position->positionname }}</td>
-                                        <td>{{ @$position->fullname }}</td>
+                                        <td>{{ @$result->centername }}</td>
+                                        <td>{{ @$result->departmentname }}</td>
+                                        <td>{{ @$result->positionname }}</td>
+                                        <td>{{ @$result->fullname }}</td>
 
                                         <td>
-                                            <a wire:click.prevent="show_edit_employer_form( {{ $position }} )" href=""><i class="fa fa-edit mr-2"></i></a>
-                                            <a wire:click.prevent="show_conformation_model( {{ $position->id }} )" href=""><i class="fa fa-trash text-danger"></i></a>
+                                            <a wire:click.prevent="show_edit_employer_form(  )" href=""><i class="fa fa-edit mr-2"></i></a>
+                                            <a wire:click.prevent="show_conformation_model( {{ $result->id }} )" href=""><i class="fa fa-trash text-danger"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -60,7 +74,7 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-centerid">
-                        {{ $positions->links() }}
+                        {{-- {{ $results->links() }} --}}
                     </div>
                 </div>
             </div>
