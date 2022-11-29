@@ -14,7 +14,7 @@
         </div>
         <div class="info d-flex justify-content-center align-items-center">
           <a class="d-block">Amr Alsaleh</a>
-          <a href="logout" class="fa-solid fa-eye ml-3"></a>
+          <a href="logout" class="fa-solid fa-arrow-right-from-bracket ml-3"></a>
         </div>
       </div>
 
