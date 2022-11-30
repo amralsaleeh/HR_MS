@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVacationsdailyTable extends Migration
+class CreateDailytasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateVacationsdailyTable extends Migration
      */
     public function up()
     {
-        Schema::create('vacationsdaily', function (Blueprint $table) {
+        Schema::create('dailytasks', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->integer('employeeid')->index('FKvacationsd896395');
+            $table->integer('employeeid')->index('FKdailytasks577353');
             $table->date('duration');
             $table->date('from');
             $table->date('to');
@@ -35,6 +35,6 @@ class CreateVacationsdailyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vacationsdaily');
+        Schema::dropIfExists('dailytasks');
     }
 }

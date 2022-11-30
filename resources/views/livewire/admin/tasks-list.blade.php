@@ -34,6 +34,7 @@
                             <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Full name</th>
+                                <th scope="col">Tasks count</th>
                                 <th scope="col">Options</th>
                             </tr>
                             </thead>
@@ -42,6 +43,7 @@
                                     <tr>
                                         <td>{{ @$employee->id }}</td>
                                         <td>{{ @$employee->fullname }}</td>
+                                        <td>Tasks count</td>
                                         <td>
                                             <a wire:click.prevent="show_edit_employer_form( {{ $employee }} )" href=""><i class="fa fa-edit mr-2"></i></a>
                                             <a wire:click.prevent="show_conformation_model( {{ $employee->id }} )" href=""><i class="fa fa-trash text-danger"></i></a>

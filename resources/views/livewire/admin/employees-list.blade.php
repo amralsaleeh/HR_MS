@@ -22,7 +22,7 @@
             <div class="col-lg-12 col-12">
                 <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>150</h3>
+                    <h3> {{ count($employees) }} </h3>
                     <p>All Employee</p>
                 </div>
                 <div class="icon">
@@ -159,31 +159,25 @@
                     <div class="form-group col-md-4">
                         <label for="positionid">Position</label>
                         <select wire:model.defer="perInfo.positionid" class="custom-select rounded-0 @error('positionid') is-invalid @enderror" id="positionid">
-                            <option selected>Choose Position ID</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                          </select>
+                            <option selected>Choose Position ID:</option>
+                            @foreach ($positions as $position)
+                                <option value="{{ @$position->id }}">{{ @$position->positionname }}</option>
+                            @endforeach
+                        </select>
                           @error('positionid')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                         @enderror
-                        {{-- <input wire:model.defer="perInfo.positionid" type="text" class="form-control @error('positionid') is-invalid @enderror" id="positionid" placeholder="choose positionid">
-                        @error('positionid')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror --}}
                     </div>
                     <div class="form-group col-md-4">
                         <label for="departmentid">Department</label>
                         <select wire:model.defer="perInfo.departmentid" class="custom-select rounded-0 @error('departmentid') is-invalid @enderror" id="departmentid">
-                            <option selected>Choose Department ID</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                          </select>
+                            <option selected>Choose Department ID:</option>
+                            @foreach ($departments as $department)
+                                <option value="{{ @$department->id }}">{{ @$department->departmentname }}</option>
+                            @endforeach
+                        </select>
                           @error('departmentid')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -193,11 +187,11 @@
                     <div class="form-group col-md-4">
                         <label for="centerid">Center</label>
                         <select wire:model.defer="perInfo.centerid" class="custom-select rounded-0 @error('centerid') is-invalid @enderror" id="centerid">
-                            <option selected>Choose Center ID</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                          </select>
+                            <option selected>Choose Center ID:</option>
+                            @foreach ($centers as $center)
+                                <option value="{{ @$center->id }}">{{ @$center->centername }}</option>
+                            @endforeach
+                        </select>
                           @error('centerid')
                         <div class="invalid-feedback">
                             {{ $message }}

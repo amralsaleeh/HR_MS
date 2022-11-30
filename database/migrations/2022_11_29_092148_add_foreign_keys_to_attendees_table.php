@@ -14,7 +14,7 @@ class AddForeignKeysToAttendeesTable extends Migration
     public function up()
     {
         Schema::table('attendees', function (Blueprint $table) {
-            $table->foreign(['employeeid'], 'FKattendees76090')->references(['id'])->on('employee');
+            $table->foreign(['employeeid'], 'FKattendees76090')->references(['id'])->on('employees');
         });
     }
 

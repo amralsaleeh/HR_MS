@@ -24,10 +24,10 @@ class PositionsList extends Component
         //     ->join('employee', 'positionid', '=', 'position.id')
         //     ->get();
 
-        $results = DB::table('employee')
-            ->join('position', 'position.id', '=', 'employee.positionid')
-            ->join('department', 'department.id', '=', 'employee.departmentid')
-            ->join('center', 'center.id', '=', 'employee.centerid')
+        $results = DB::table('employees')
+            ->join('positions', 'positions.id', '=', 'employees.positionid')
+            ->join('departments', 'departments.id', '=', 'employees.departmentid')
+            ->join('centers', 'centers.id', '=', 'employees.centerid')
             ->get();
 
         return view('livewire.admin.positions-list', [

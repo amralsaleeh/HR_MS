@@ -9,5 +9,13 @@ class Position extends Model
 {
     use HasFactory;
 
-    protected $table = 'position';
+    protected $fillable = [
+        'id',
+        'positionname',
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

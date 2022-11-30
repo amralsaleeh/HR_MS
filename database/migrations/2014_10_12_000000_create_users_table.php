@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->integer('employeeid')->index('FKlogininfo143996');
+            $table->integer('employeeid')->index('FKusers143996');
             $table->string('username')->unique('username');
             $table->string('password');
             $table->timestamp('login')->nullable();

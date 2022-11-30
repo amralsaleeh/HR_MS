@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePositionTable extends Migration
+class AddForeignKeysToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreatePositionTable extends Migration
      */
     public function up()
     {
-        Schema::create('position', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->string('positionname');
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign(['employeeid'], 'FKusers143996')->references(['id'])->on('employees');
         });
     }
 
@@ -28,6 +25,8 @@ class CreatePositionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('position');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign('FKusers143996');
+        });
     }
 }

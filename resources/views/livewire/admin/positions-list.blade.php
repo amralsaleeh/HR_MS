@@ -22,7 +22,7 @@
             <div class="col-lg-12 col-12">
                 <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>355</h3>
+                    <h3> {{ count($results) }} </h3>
 
                     <p>All Positions</p>
                 </div>

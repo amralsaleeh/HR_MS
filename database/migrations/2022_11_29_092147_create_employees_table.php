@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmployeeTable extends Migration
+class CreateEmployeesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,19 @@ class CreateEmployeeTable extends Migration
      */
     public function up()
     {
-        Schema::create('employee', function (Blueprint $table) {
+        Schema::create('employees', function (Blueprint $table) {
             $table->integer('id', true);
             $table->integer('nationalnumber')->unique('nationalnumber');
             $table->string('fullname');
             $table->string('firsname');
             $table->string('lastname');
             $table->string('fathername');
-            $table->string('mothername')->nullable();
+            $table->string('mothername');
             $table->date('birthdate');
             $table->boolean('gender');
-            $table->integer('positionid')->index('FKemployee650198');
-            $table->integer('departmentid')->index('FKemployee839638');
-            $table->integer('centerid')->index('FKemployee962608');
+            $table->integer('positionid')->index('FKpositions650198');
+            $table->integer('departmentid')->index('FKdepartmens839638');
+            $table->integer('centerid')->index('FKcenters962608');
             $table->date('startdate');
             $table->integer('phonenumber');
             $table->timestamp('created_at');
@@ -40,6 +40,6 @@ class CreateEmployeeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee');
+        Schema::dropIfExists('employees');
     }
 }

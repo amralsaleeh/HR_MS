@@ -23,7 +23,7 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-end">
                             <button wire:click.prevent="show_new_employer_form" class="btn btn-primary">
-                                <i class="fa fa-plus-circle mr-2"></i> Add New Employer
+                                <i class="fa fa-plus-circle mr-2"></i> Import Fingerprints Log
                             </button>
                         </div>
                     </div>

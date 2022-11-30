@@ -2,8 +2,11 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Center;
 use Livewire\Component;
 use App\Models\Employee;
+use App\Models\Position;
+use App\Models\Department;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,16 +17,21 @@ class EmployeesList extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $employee;
+
     public $perInfo=[];
+
     public $showEditEmployerForm = false;
     public $deleteEmployeeId = null;
 
     public function render()
     {
         $employees = Employee::paginate(10);
+        $positions = Position::get();
+        $departments = Department::get();
+        $centers = Center::get();
 
         return view('livewire.admin.employees-list', [
-            'employees' => $employees,
+            'employees' => $employees, 'positions' => $positions, 'departments' => $departments, 'centers' => $centers,
         ]);
     }
 

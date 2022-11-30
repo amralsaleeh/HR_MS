@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeysToVacationsdailyTable extends Migration
+class AddForeignKeysToDailyvacationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddForeignKeysToVacationsdailyTable extends Migration
      */
     public function up()
     {
-        Schema::table('vacationsdaily', function (Blueprint $table) {
-            $table->foreign(['employeeid'], 'FKvacationsd896395')->references(['id'])->on('employee');
+        Schema::table('dailyvacations', function (Blueprint $table) {
+            $table->foreign(['employeeid'], 'FKdailyvacations896395')->references(['id'])->on('employees');
         });
     }
 
@@ -25,8 +25,8 @@ class AddForeignKeysToVacationsdailyTable extends Migration
      */
     public function down()
     {
-        Schema::table('vacationsdaily', function (Blueprint $table) {
-            $table->dropForeign('FKvacationsd896395');
+        Schema::table('dailyvacations', function (Blueprint $table) {
+            $table->dropForeign('FKdailyvacations896395');
         });
     }
 }

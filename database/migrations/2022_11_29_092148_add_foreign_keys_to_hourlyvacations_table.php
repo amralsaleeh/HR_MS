@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeysToLogininfoTable extends Migration
+class AddForeignKeysToHourlyvacationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddForeignKeysToLogininfoTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->foreign(['employeeid'], 'FKlogininfo143996')->references(['id'])->on('employee');
+        Schema::table('hourlyvacations', function (Blueprint $table) {
+            $table->foreign(['employeeid'], 'FKhourlyvacations692359')->references(['id'])->on('employees');
         });
     }
 
@@ -25,8 +25,8 @@ class AddForeignKeysToLogininfoTable extends Migration
      */
     public function down()
     {
-        Schema::table('logininfo', function (Blueprint $table) {
-            $table->dropForeign('FKlogininfo143996');
+        Schema::table('hourlyvacations', function (Blueprint $table) {
+            $table->dropForeign('FKhourlyvacations692359');
         });
     }
 }

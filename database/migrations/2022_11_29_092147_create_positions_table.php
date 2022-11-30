@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeysToTaskshourlyTable extends Migration
+class CreatePositionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddForeignKeysToTaskshourlyTable extends Migration
      */
     public function up()
     {
-        Schema::table('taskshourly', function (Blueprint $table) {
-            $table->foreign(['employeeid'], 'FKtaskshourl833137')->references(['id'])->on('employee');
+        Schema::create('positions', function (Blueprint $table) {
+            $table->integer('id', true);
+            $table->string('positionname');
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at');
         });
     }
 
@@ -25,8 +28,6 @@ class AddForeignKeysToTaskshourlyTable extends Migration
      */
     public function down()
     {
-        Schema::table('taskshourly', function (Blueprint $table) {
-            $table->dropForeign('FKtaskshourl833137');
-        });
+        Schema::dropIfExists('positions');
     }
 }

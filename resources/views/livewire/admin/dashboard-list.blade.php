@@ -137,7 +137,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
-                    <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add item</button>
+                    <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add New</button>
                 </div>
                 </div>
                 <!-- /.card -->
