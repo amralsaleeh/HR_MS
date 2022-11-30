@@ -103,7 +103,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <label for="id">ID</label>
                         <input wire:model.defer="perInfo.id" type="text" class="form-control @error('id') is-invalid @enderror" id="id" placeholder="Automatically generate" disabled>
                         @error('id')
@@ -112,25 +112,52 @@
                         </div>
                         @enderror
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-9">
                         <label for="fullname">Full name</label>
-                        <input wire:model.defer="perInfo.fullname" type="text" class="form-control @error('fullname') is-invalid @enderror" id="fullname" placeholder="Enter full name">
+                        <input wire:model.defer="perInfo.fullname" type="text" class="form-control @error('fullname') is-invalid @enderror" id="fullname" placeholder="Automatically generate" disabled>
                         @error('fullname')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                         @enderror
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="birthdate">Birth date</label>
-                        <input wire:model.defer="perInfo.birthdate" type="text" class="form-control @error('birthdate') is-invalid @enderror" id="birthdate" placeholder="YYYY-MM-DD">
-                        @error('birthdate')
+                    <div class="form-group col-md-3">
+                        <label for="firstname">First name</label>
+                        <input wire:model.defer="perInfo.firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" id="firstname" placeholder="Enter first name">
+                        @error('firstname')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                         @enderror
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
+                        <label for="lastname">Last name</label>
+                        <input wire:model.defer="perInfo.lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" id="lastname" placeholder="Enter last name">
+                        @error('lastname')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="fathername">Father name</label>
+                        <input wire:model.defer="perInfo.fathername" type="text" class="form-control @error('fathername') is-invalid @enderror" id="fathername" placeholder="Enter father name">
+                        @error('fathername')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="mothername">Mother name</label>
+                        <input wire:model.defer="perInfo.mothername" type="text" class="form-control @error('mothername') is-invalid @enderror" id="mothername" placeholder="Enter mother name">
+                        @error('mothername')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-3">
                         <label for="nationalnumber">National Number</label>
                         <input wire:model.defer="perInfo.nationalnumber" type="text" class="form-control @error('nationalnumber') is-invalid @enderror" id="nationalnumber" placeholder="02000000000">
                         @error('nationalnumber')
@@ -138,7 +165,7 @@
                             {{ $message }}
                         </div>
                         @enderror
-                    </div><div class="form-group col-md-4">
+                    </div><div class="form-group col-md-3">
                         <label for="phonenumber">Phone Number</label>
                         <input wire:model.defer="perInfo.phonenumber" type="text" class="form-control @error('phonenumber') is-invalid @enderror" id="phonenumber" placeholder="0900 000 000">
                         @error('phonenumber')
@@ -147,7 +174,16 @@
                         </div>
                         @enderror
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
+                        <label for="birthdate">Birth date</label>
+                        <input wire:model.defer="perInfo.birthdate" type="text" class="form-control @error('birthdate') is-invalid @enderror" id="birthdate" placeholder="YYYY-MM-DD">
+                        @error('birthdate')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-3">
                         <label for="startdate">Start date</label>
                         <input wire:model.defer="perInfo.startdate" type="text" class="form-control @error('startdate') is-invalid @enderror" id="startdate" placeholder="YYYY-MM-DD">
                         @error('startdate')
@@ -156,10 +192,23 @@
                         </div>
                         @enderror
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
+                        <label for="gender">Gender</label>
+                        <select wire:model.defer="perInfo.gender" class="custom-select rounded-0 @error('gender') is-invalid @enderror" id="gender">
+                            <option selected>Choose Gender:</option>
+                            <option value="1"> Male </option>
+                            <option value="0"> Female </option>
+                        </select>
+                          @error('gender')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-3">
                         <label for="positionid">Position</label>
                         <select wire:model.defer="perInfo.positionid" class="custom-select rounded-0 @error('positionid') is-invalid @enderror" id="positionid">
-                            <option selected>Choose Position ID:</option>
+                            <option selected>Choose Position:</option>
                             @foreach ($positions as $position)
                                 <option value="{{ @$position->id }}">{{ @$position->positionname }}</option>
                             @endforeach
@@ -170,10 +219,10 @@
                         </div>
                         @enderror
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <label for="departmentid">Department</label>
                         <select wire:model.defer="perInfo.departmentid" class="custom-select rounded-0 @error('departmentid') is-invalid @enderror" id="departmentid">
-                            <option selected>Choose Department ID:</option>
+                            <option selected>Choose Department:</option>
                             @foreach ($departments as $department)
                                 <option value="{{ @$department->id }}">{{ @$department->departmentname }}</option>
                             @endforeach
@@ -184,10 +233,10 @@
                         </div>
                         @enderror
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <label for="centerid">Center</label>
                         <select wire:model.defer="perInfo.centerid" class="custom-select rounded-0 @error('centerid') is-invalid @enderror" id="centerid">
-                            <option selected>Choose Center ID:</option>
+                            <option selected>Choose Center:</option>
                             @foreach ($centers as $center)
                                 <option value="{{ @$center->id }}">{{ @$center->centername }}</option>
                             @endforeach

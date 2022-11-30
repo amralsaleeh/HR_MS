@@ -46,8 +46,12 @@ class EmployeesList extends Component
     {
         $validatedData =  Validator::make($this->perInfo, [
             'nationalnumber' => 'required|unique:employees',
-            'fullname' => 'required',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'fathername' => 'required',
+            'mothername' => 'required',
             'birthdate' => 'required',
+            'gender' => 'required',
             'positionid' => 'required',
             'departmentid' => 'required',
             'centerid' => 'required',
