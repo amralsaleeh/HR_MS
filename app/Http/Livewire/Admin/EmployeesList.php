@@ -80,14 +80,20 @@ class EmployeesList extends Component
     {
         $validatedData =  Validator::make($this->perInfo, [
             'nationalnumber' => 'required|unique:employees,phoneNumber,'.$this->employee->id,
-            'fullname' => 'required',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'fathername' => 'required',
+            'mothername' => 'required',
             'birthdate' => 'required',
+            'gender' => 'required',
             'positionid' => 'required',
             'departmentid' => 'required',
             'centerid' => 'required',
             'startdate' => 'required',
             'phonenumber' => 'required|unique:employees,phoneNumber,'.$this->employee->id,
         ])-> validate();
+
+        $validatedData['fullname'] = $this->perInfo['firstname']  . ' ' . $this->perInfo['fathername'] . ' ' .  $this->perInfo['lastname'];
 
         $this->employee->update($validatedData);
 
