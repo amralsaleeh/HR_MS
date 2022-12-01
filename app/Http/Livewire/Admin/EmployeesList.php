@@ -60,6 +60,7 @@ class EmployeesList extends Component
         ])-> validate();
 
         // $validatedData['password'] = bcrypt($validatedData['password']);
+        $validatedData['fullname'] = $this->perInfo['firstname']  . ' ' . $this->perInfo['fathername'] . ' ' .  $this->perInfo['lastname'];
 
         Employee::create($validatedData);
 
