@@ -17,9 +17,9 @@ class CreateEmployeesTable extends Migration
             $table->integer('id', true);
             $table->string('nationalnumber')->unique('nationalnumber');
             $table->string('fullname')->nullable();
-            $table->string('firsname');
-            $table->string('lastname');
+            $table->string('firstname');
             $table->string('fathername');
+            $table->string('lastname');
             $table->string('mothername');
             $table->date('birthdate');
             $table->boolean('gender');
@@ -27,7 +27,7 @@ class CreateEmployeesTable extends Migration
             $table->integer('departmentid')->index('FKdepartmens839638');
             $table->integer('centerid')->index('FKcenters962608');
             $table->date('startdate');
-            $table->integer('phonenumber');
+            $table->integer('phonenumber')->unique('phonenumber');
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
         });

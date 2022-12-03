@@ -174,6 +174,20 @@
                         </div>
                         @enderror
                     </div>
+                    {{-- <div class="form-group col-md-3">
+                        <label for="birthdate">Birth date</label>
+                        <div class="input-group date" id="birthdate" data-target-input="nearest">
+                            <input wire:model.defer="perInfo.birthdate" type="text" class="form-control @error('birthdate') is-invalid @enderror datetimepicker-input" id="birthdate" data-target="#birthdate" placeholder="YYYY-MM-DD"/>
+                            <div class="input-group-append" data-target="#birthdate" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                            @error('birthdate')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                    </div> --}}
                     <div class="form-group col-md-3">
                         <label for="birthdate">Birth date</label>
                         <input wire:model.defer="perInfo.birthdate" type="text" class="form-control @error('birthdate') is-invalid @enderror" id="birthdate" placeholder="YYYY-MM-DD">
