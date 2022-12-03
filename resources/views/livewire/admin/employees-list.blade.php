@@ -131,18 +131,18 @@
                         @enderror
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="lastname">Last name</label>
-                        <input wire:model.defer="perInfo.lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" id="lastname" placeholder="Enter last name">
-                        @error('lastname')
+                        <label for="fathername">Father name</label>
+                        <input wire:model.defer="perInfo.fathername" type="text" class="form-control @error('fathername') is-invalid @enderror" id="fathername" placeholder="Enter father name">
+                        @error('fathername')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                         @enderror
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="fathername">Father name</label>
-                        <input wire:model.defer="perInfo.fathername" type="text" class="form-control @error('fathername') is-invalid @enderror" id="fathername" placeholder="Enter father name">
-                        @error('fathername')
+                        <label for="lastname">Last name</label>
+                        <input wire:model.defer="perInfo.lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" id="lastname" placeholder="Enter last name">
+                        @error('lastname')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>

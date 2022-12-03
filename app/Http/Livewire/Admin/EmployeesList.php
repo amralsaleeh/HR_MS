@@ -60,8 +60,12 @@ class EmployeesList extends Component
         ])-> validate();
 
         // $validatedData['password'] = bcrypt($validatedData['password']);
-        $validatedData['fullname'] = $this->perInfo['firstname']  . ' ' . $this->perInfo['fathername'] . ' ' .  $this->perInfo['lastname'];
+        $validatedData['firstname'] = ucfirst($validatedData['firstname']);
+        $validatedData['fathername'] = ucfirst($validatedData['fathername']);
+        $validatedData['lastname'] = ucfirst($validatedData['lastname']);
+        $validatedData['mothername'] = ucfirst($validatedData['mothername']);
 
+        $validatedData['fullname'] = $validatedData['firstname']  . ' ' . $validatedData['fathername'] . ' ' .  $validatedData['lastname'];
         Employee::create($validatedData);
 
         $this->dispatchBrowserEvent('hide_employer_form', ['message' => 'Employee added successfully']);
@@ -93,7 +97,12 @@ class EmployeesList extends Component
             'phonenumber' => 'required|unique:employees,phoneNumber,'.$this->employee->id,
         ])-> validate();
 
-        $validatedData['fullname'] = $this->perInfo['firstname']  . ' ' . $this->perInfo['fathername'] . ' ' .  $this->perInfo['lastname'];
+        $validatedData['firstname'] = ucfirst($validatedData['firstname']);
+        $validatedData['fathername'] = ucfirst($validatedData['fathername']);
+        $validatedData['lastname'] = ucfirst($validatedData['lastname']);
+        $validatedData['mothername'] = ucfirst($validatedData['mothername']);
+
+        $validatedData['fullname'] = $validatedData['firstname']  . ' ' . $validatedData['fathername'] . ' ' .  $validatedData['lastname'];
 
         $this->employee->update($validatedData);
 
