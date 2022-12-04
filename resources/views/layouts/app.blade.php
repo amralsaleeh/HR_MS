@@ -85,19 +85,17 @@
 {{-- <script>
     $.widget.bridge('uibutton', $.ui.button)
 </script> --}}
-
-<script>
+{{-- <script>
     $(document).ready( function() {
         $('#birthdate').datetimepicker({
             format: 'YYYY-MM-DD',
             viewMode: 'years'
         })
     })
-</script>
+</script> --}}
 
 <script>
-
-$(document).ready(function() {
+    $(document).ready(function() {
     toastr.options = {
         "closeButton": false,
         "debug": false,
@@ -128,6 +126,21 @@ $(document).ready(function() {
     window.addEventListener('hide_conformation_model', event => {
         $('#conformation-model').modal('hide');
         toastr.success(event.detail.message, 'Success!');
+    })
+    // Vacations
+    window.addEventListener('show_new_daily_vacation_form', event => {
+        $('#new-daily-vacation-form').modal('show');
+    })
+    window.addEventListener('show_new_hourly_vacation_form', event => {
+        $('#new-hourly-vacation-form').modal('show');
+    })
+
+    // Tasks
+    window.addEventListener('show_new_daily_task_form', event => {
+        $('#new-daily-task-form').modal('show');
+    })
+    window.addEventListener('show_new_hourly_task_form', event => {
+        $('#new-hourly-task-form').modal('show');
     })
 
 })

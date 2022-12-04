@@ -105,7 +105,8 @@
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="id">ID</label>
-                        <input wire:model.defer="perInfo.id" type="text" class="form-control @error('id') is-invalid @enderror" id="id" placeholder="Automatically generate" disabled>
+                        {{-- <input wire:model.defer="perInfo.id" type="text" class="form-control @error('id') is-invalid @enderror" id="id" placeholder="Automatically generate" disabled> --}}
+                        <input wire:model.defer="perInfo.id" type="text" class="form-control @error('id') is-invalid @enderror" id="id" placeholder="Enter Employee Code">
                         @error('id')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -114,7 +115,7 @@
                     </div>
                     <div class="form-group col-md-9">
                         <label for="fullname">Full name</label>
-                        <input wire:model.defer="perInfo.fullname" type="text" class="form-control @error('fullname') is-invalid @enderror" id="fullname" placeholder="Automatically generate" disabled>
+                        <input wire:model.defer="perInfo.fullname" type="text" class="form-control @error('fullname') is-invalid @enderror" id="fullname" placeholder="" disabled>
                         @error('fullname')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -167,7 +168,7 @@
                         @enderror
                     </div><div class="form-group col-md-3">
                         <label for="phonenumber">Phone Number</label>
-                        <input wire:model.defer="perInfo.phonenumber" type="text" class="form-control @error('phonenumber') is-invalid @enderror" id="phonenumber" placeholder="900 000 000">
+                        <input wire:model.defer="perInfo.phonenumber" type="text" class="form-control @error('phonenumber') is-invalid @enderror" id="phonenumber" placeholder="0900000000">
                         @error('phonenumber')
                         <div class="invalid-feedback">
                             {{ $message }}

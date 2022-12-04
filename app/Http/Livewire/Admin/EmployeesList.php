@@ -12,17 +12,17 @@ use Illuminate\Support\Facades\Validator;
 
 class EmployeesList extends Component
 {
+    // Pagination
     use WithPagination;
-
     protected $paginationTheme = 'bootstrap';
 
+    // Objects
     public $employee;
-
     public $perInfo=[];
-
     public $showEditEmployerForm = false;
     public $deleteEmployeeId = null;
 
+    // Render
     public function render()
     {
         $employees = Employee::paginate(10);
@@ -35,6 +35,7 @@ class EmployeesList extends Component
         ]);
     }
 
+    // Show new form
     public function show_new_employer_form()
     {
         $this->perInfo = [];
@@ -42,9 +43,11 @@ class EmployeesList extends Component
         $this->dispatchBrowserEvent('show_employer_form');
     }
 
+    // New
     public function new_employer()
     {
         $validatedData =  Validator::make($this->perInfo, [
+            'id' => 'required',
             'nationalnumber' => 'required|unique:employees',
             'firstname' => 'required',
             'lastname' => 'required',
@@ -71,6 +74,7 @@ class EmployeesList extends Component
         $this->dispatchBrowserEvent('hide_employer_form', ['message' => 'Employee added successfully']);
     }
 
+    // Show edit form
     public function show_edit_employer_form(Employee $employee)
     {
         $this->showEditEmployerForm = true;
@@ -80,9 +84,11 @@ class EmployeesList extends Component
         $this->dispatchBrowserEvent('show_employer_form');
     }
 
+    // Edit
     public function edit_employer()
     {
         $validatedData =  Validator::make($this->perInfo, [
+            'id' => 'required',
             'nationalnumber' => 'required|unique:employees,phoneNumber,'.$this->employee->id,
             'firstname' => 'required',
             'lastname' => 'required',
@@ -109,6 +115,7 @@ class EmployeesList extends Component
         $this->dispatchBrowserEvent('hide_employer_form', ['message' => 'Employee updated successfully']);
     }
 
+    // Conformation
     public function show_conformation_model($employeeId)
     {
         $this->deleteEmployeeId = $employeeId;
@@ -116,6 +123,7 @@ class EmployeesList extends Component
         $this->dispatchBrowserEvent('show_conformation_model');
     }
 
+    // Delete
     public function delete_employee()
     {
         $employee = Employee::findOrFail($this->deleteEmployeeId);
