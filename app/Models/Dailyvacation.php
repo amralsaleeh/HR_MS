@@ -10,7 +10,6 @@ class Dailyvacation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id',
         'employeeid',
         'requestdate',
         'from',

@@ -131,8 +131,16 @@
     window.addEventListener('show_new_daily_vacation_form', event => {
         $('#new-daily-vacation-form').modal('show');
     })
+    window.addEventListener('hide_new_daily_vacation_form', event => {
+        $('#new-daily-vacation-form').modal('hide');
+        toastr.success(event.detail.message, 'Success!');
+    })
     window.addEventListener('show_new_hourly_vacation_form', event => {
         $('#new-hourly-vacation-form').modal('show');
+    })
+    window.addEventListener('hide_new_hourly_vacation_form', event => {
+        $('#new-hourly-vacation-form').modal('hide');
+        toastr.success(event.detail.message, 'Success!');
     })
 
     // Tasks
