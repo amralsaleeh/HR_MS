@@ -139,10 +139,20 @@
     window.addEventListener('show_new_daily_task_form', event => {
         $('#new-daily-task-form').modal('show');
     })
+    window.addEventListener('hide_new_daily_task_form', event => {
+        $('#new-daily-task-form').modal('hide');
+        toastr.success(event.detail.message, 'Success!');
+    })
     window.addEventListener('show_new_hourly_task_form', event => {
         $('#new-hourly-task-form').modal('show');
     })
-
+    window.addEventListener('hide_new_hourly_task_form', event => {
+        $('#new-hourly-task-form').modal('hide');
+        toastr.success(event.detail.message, 'Success!');
+    })
+    window.addEventListener('show_employee_tasks_form', event => {
+        $('#employee-tasks-form').modal('show');
+    })
 })
 </script>
 

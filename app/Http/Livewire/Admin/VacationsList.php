@@ -14,6 +14,7 @@ class VacationsList extends Component
 
     // Objects
     public $employee;
+    public $perInfo=[];
     public $showEditVacationForm = false;
 
     // Render

@@ -19,7 +19,7 @@ class CreateDailyvacationsTable extends Migration
             $table->date('requestdate');
             $table->date('from');
             $table->date('to');
-            $table->date('duration');
+            $table->tinyInteger('duration');
             $table->tinyInteger('isauthorization');
             $table->tinyInteger('type');
             $table->string('reason');

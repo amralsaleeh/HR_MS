@@ -48,8 +48,7 @@
                                         <td>{{ @$employee->fullname }}</td>
                                         <td>Vacations count</td>
                                         <td>
-                                            <a wire:click.prevent="show_edit_employer_form( {{ $employee }} )" href=""><i class="fa fa-edit mr-2"></i></a>
-                                            <a wire:click.prevent="show_conformation_model( {{ $employee->id }} )" href=""><i class="fa fa-trash text-danger"></i></a>
+                                            <a wire:click.prevent="show_edit_employer_form( {{ $employee }} )" href=""><i class="fa-solid fa-folder-open"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

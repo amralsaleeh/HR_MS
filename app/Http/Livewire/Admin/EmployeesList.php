@@ -43,7 +43,7 @@ class EmployeesList extends Component
         $this->dispatchBrowserEvent('show_employer_form');
     }
 
-    // New
+    // New employer
     public function new_employer()
     {
         $validatedData =  Validator::make($this->perInfo, [
@@ -84,7 +84,7 @@ class EmployeesList extends Component
         $this->dispatchBrowserEvent('show_employer_form');
     }
 
-    // Edit
+    // Edit employer
     public function edit_employer()
     {
         $validatedData =  Validator::make($this->perInfo, [
