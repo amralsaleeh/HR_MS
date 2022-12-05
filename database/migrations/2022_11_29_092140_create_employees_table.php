@@ -25,9 +25,10 @@ class CreateEmployeesTable extends Migration
             $table->date('birthdate');
             $table->date('startdate');
             $table->boolean('gender');
-            $table->integer('positionid')->index('FKpositions650198');
-            $table->integer('departmentid')->index('FKdepartmens839638');
-            $table->integer('centerid')->index('FKcenters962608');
+            $table->integer('isactive');
+            $table->integer('positionid')->index('FKpositions650198')->nullable();;
+            $table->integer('departmentid')->index('FKdepartmens839638')->nullable();;
+            $table->integer('centerid')->index('FKcenters962608')->nullable();;
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
         });

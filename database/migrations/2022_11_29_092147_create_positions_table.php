@@ -16,6 +16,7 @@ class CreatePositionsTable extends Migration
         Schema::create('positions', function (Blueprint $table) {
             $table->integer('id', true);
             $table->string('positionname');
+            $table->tinyInteger('numberofvacancies');
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
         });

@@ -19,12 +19,36 @@
         <div class="container-fluid">
         {{-- Boxes --}}
         <div class="row">
-            <div class="col-lg-12 col-12">
+            <div class="col-lg-4 col-4">
                 <div class="small-box bg-success">
                 <div class="inner">
                     <h3> {{ count($results) }} </h3>
 
                     <p>All Positions</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-4">
+                <div class="small-box bg-info">
+                <div class="inner">
+                    <h3> {{ count($results) }} </h3>
+
+                    <p>All Vacancies</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-4">
+                <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3> {{ count($results) }} </h3>
+
+                    <p>Empty Vacancies</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
@@ -48,25 +72,22 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th scope="col">Center</th>
-                                <th scope="col">Department</th>
                                 <th scope="col">Position</th>
+                                <th scope="col">Vacancies</th>
                                 <th scope="col">Employee</th>
-                                {{-- <th scope="col">Options</th> --}}
+                                <th scope="col">Options</th>
                             </tr>
                             </thead>
                             <tbody>
                                 @foreach ($results as $result)
                                     <tr>
-                                        <td>{{ @$result->centername }}</td>
-                                        <td>{{ @$result->departmentname }}</td>
-                                        <td>{{ @$result->positionname }}</td>
-                                        <td>{{ @$result->fullname }}</td>
+                                        <td>{{ $result->positionname }}</td>
+                                        <td>{{ $result->numberofvacancies }}</td>
+                                        <td>1</td>
 
-                                        {{-- <td>
-                                            <a wire:click.prevent="show_edit_employer_form(  )" href=""><i class="fa fa-edit mr-2"></i></a>
-                                            <a wire:click.prevent="show_conformation_model( {{ $result->id }} )" href=""><i class="fa fa-trash text-danger"></i></a>
-                                        </td> --}}
+                                        <td>
+                                            <a wire:click.prevent="show_edit_employer_form(  )" href=""><i class="fa-solid fa-folder-open"></i></a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

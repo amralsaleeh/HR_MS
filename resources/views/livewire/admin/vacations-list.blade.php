@@ -46,7 +46,7 @@
                                         <td>{{ @$employee->fullname }}</td>
                                         <td>{{ $dailyvacations->get($employee->id) + $hourlyvacations->get($employee->id) }}</td>
                                         <td>
-                                            <a wire:click.prevent="show_edit_employer_form( {{ $employee }} )" href=""><i class="fa-solid fa-folder-open"></i></a>
+                                            <a wire:click.prevent="show_employee_vacation_form( {{ $employee->id }} )" href=""><i class="fa-solid fa-folder-open"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -302,6 +302,81 @@
                             {{ $message }}
                         </div>
                         @enderror
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancel</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i>
+                    @if ($showEditVacationForm)
+                        <span>Save Changes</span>
+                    @else
+                        <span>Save</span>
+                    @endif
+                </button>
+            </div>
+            </div>
+        </form>
+        </div>
+    </div>
+
+    {{-- Employee vacations form --}}
+    <div wire:ignore.self class="modal fade" id="employee-vacations-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+        <form wire:submit.prevent="{{-- EDIT HERE --}}" autocomplete="off">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <span>{{ $employee->fullname }} / Vacations</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form">
+                    <div>
+                        <h4>Daily</h4>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">Count</th>
+                                <th scope="col">Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($employees as $employee)
+                                    <tr>
+                                        <td>{{ $dailyvacations->get($employee->id) }}</td>
+                                        <td>
+                                            <a wire:click.prevent="show_employee_vacation_form( {{ $employee->id }} )" href=""><i class="fa-solid fa-folder-open"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    <div>
+                        <h4>Hourly</h4>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">Count</th>
+                                <th scope="col">Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($employees as $employee)
+                                    <tr>
+                                        <td>{{ $hourlyvacations->get($employee->id) }}</td>
+                                        <td>
+                                            <a wire:click.prevent="show_employee_vacation_form( {{ $employee->id }} )" href=""><i class="fa-solid fa-folder-open"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

@@ -105,4 +105,20 @@ class VacationsList extends Component
 
         $this->dispatchBrowserEvent('hide_new_hourly_vacation_form', ['message' => 'Vacation added successfully']);
     }
+
+    // Show employee vacation
+    public function show_employee_vacation_form($employeeId)
+    {
+        $this->employeeVacationInfo = [];
+
+        $dailyvacations = DB::table('dailyvacations')
+            ->join('employees', 'employees.id', '=', 'dailyvacations.employeeid')
+            ->where('employeeid', '=', $employeeId)->get();
+
+        $hourlyvacations = DB::table('hourlyvacations')
+            ->join('employees', 'employees.id', '=', 'hourlyvacations.employeeid')
+            ->where('employeeid', '=', $employeeId)->get();
+
+        $this->dispatchBrowserEvent('show_employee_vacations_form');
+    }
 }

@@ -320,14 +320,14 @@
         </div>
     </div>
 
-    {{-- Employee task form --}}
+    {{-- Employee tasks form --}}
     <div wire:ignore.self class="modal fade" id="employee-tasks-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
         <form wire:submit.prevent="{{-- EDIT HERE --}}" autocomplete="off">
             <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                    <span>Employee tasks</span>
+                    <span>{{ $employee->fullname }} / Tasks</span>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -340,15 +340,13 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th scope="col">Full name</th>
-                                <th scope="col">Tasks count</th>
+                                <th scope="col">Count</th>
                                 <th scope="col">Options</th>
                             </tr>
                             </thead>
                             <tbody>
                                 @foreach ($employees as $employee)
                                     <tr>
-                                        <td>{{ $employee->fullname }}</td>
                                         <td>{{ $dailytasks->get($employee->id) + $hourlytasks->get($employee->id) }}</td>
                                         <td>
                                             <a wire:click.prevent="show_employee_task_form( {{ $employee->id }} )" href=""><i class="fa-solid fa-folder-open"></i></a>
@@ -364,15 +362,13 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th scope="col">Full name</th>
-                                <th scope="col">Tasks count</th>
+                                <th scope="col">Count</th>
                                 <th scope="col">Options</th>
                             </tr>
                             </thead>
                             <tbody>
                                 @foreach ($employees as $employee)
                                     <tr>
-                                        <td>{{ $employee->fullname }}</td>
                                         <td>{{ $hourlytasks->get($employee->id) + $hourlytasks->get($employee->id) }}</td>
                                         <td>
                                             <a wire:click.prevent="show_employee_task_form( {{ $employee->id }} )" href=""><i class="fa-solid fa-folder-open"></i></a>

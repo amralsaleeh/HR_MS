@@ -19,6 +19,7 @@ class Employee extends Model
         'mothername',
         'birthdate',
         'gender',
+        'isactive',
         'positionid',
         'departmentid',
         'centerid',
