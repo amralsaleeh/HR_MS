@@ -334,8 +334,54 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-row">
-
+                <div class="form">
+                    <div>
+                        <h4>Daily</h4>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">Full name</th>
+                                <th scope="col">Tasks count</th>
+                                <th scope="col">Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($employees as $employee)
+                                    <tr>
+                                        <td>{{ $employee->fullname }}</td>
+                                        <td>{{ $dailytasks->get($employee->id) + $hourlytasks->get($employee->id) }}</td>
+                                        <td>
+                                            <a wire:click.prevent="show_employee_task_form( {{ $employee->id }} )" href=""><i class="fa-solid fa-folder-open"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    <div>
+                        <h4>Hourly</h4>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">Full name</th>
+                                <th scope="col">Tasks count</th>
+                                <th scope="col">Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($employees as $employee)
+                                    <tr>
+                                        <td>{{ $employee->fullname }}</td>
+                                        <td>{{ $hourlytasks->get($employee->id) + $hourlytasks->get($employee->id) }}</td>
+                                        <td>
+                                            <a wire:click.prevent="show_employee_task_form( {{ $employee->id }} )" href=""><i class="fa-solid fa-folder-open"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

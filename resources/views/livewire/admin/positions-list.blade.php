@@ -52,7 +52,7 @@
                                 <th scope="col">Department</th>
                                 <th scope="col">Position</th>
                                 <th scope="col">Employee</th>
-                                <th scope="col">Options</th>
+                                {{-- <th scope="col">Options</th> --}}
                             </tr>
                             </thead>
                             <tbody>
@@ -63,10 +63,10 @@
                                         <td>{{ @$result->positionname }}</td>
                                         <td>{{ @$result->fullname }}</td>
 
-                                        <td>
+                                        {{-- <td>
                                             <a wire:click.prevent="show_edit_employer_form(  )" href=""><i class="fa fa-edit mr-2"></i></a>
                                             <a wire:click.prevent="show_conformation_model( {{ $result->id }} )" href=""><i class="fa fa-trash text-danger"></i></a>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>
