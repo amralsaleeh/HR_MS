@@ -40,6 +40,7 @@ class EmployeesList extends Component
     {
         $this->perInfo = [];
         $this->showEditEmployerForm = false;
+
         $this->dispatchBrowserEvent('show_employer_form');
     }
 
@@ -131,7 +132,4 @@ class EmployeesList extends Component
 
         $this->dispatchBrowserEvent('hide_conformation_model', ['message' => 'Employee deleted successfully']);
     }
-
-
-
 }

@@ -19,10 +19,20 @@ class VacationsList extends Component
 
     // Objects
     public $employee;
+
     public $employeeId = null;
-    public $employeeFullName = "Automatically generate";
+    public $employeeFullName = null;
+
     public $dailyVacationInfo=[];
+    public $dailyVacationFrom = null;
+    public $dailyVacationTo = null;
+    public $dailyVacationDuration = null;
+
     public $hourlyVacationInfo=[];
+    public $hourlyVacationFrom = null;
+    public $hourlyVacationTo = null;
+    public $hourlyVacationDuration = null;
+
     public $employeeVacationInfo = [];
     public $showEditVacationForm = false;
 
@@ -54,10 +64,40 @@ class VacationsList extends Component
         $this->employeeFullName = $employee->fullname;
     }
 
+    // Insert from for daily vacation
+    public function updateddailyVacationFrom($dailyVacationFrom)
+    {
+        $this->dailyVacationFrom = $dailyVacationFrom;
+    }
+    // Insert to for daily vacation
+    public function updateddailyVacationTo($dailyVacationTo)
+    {
+        $this->dailyVacationTo = $dailyVacationTo;
+        $this->dailyVacationDuration = Carbon::parse($this->dailyVacationFrom)->diff(Carbon::parse($this->dailyVacationTo))->days + 1;
+    }
+
+    // Insert from for hourly vacation
+    public function updatedhourlyVacationFrom($hourlyVacationFrom)
+    {
+        $this->hourlyVacationFrom = $hourlyVacationFrom;
+    }
+    // Insert to for hourly vacation
+    public function updatedhourlyVacationTo($hourlyVacationTo)
+    {
+        $this->hourlyVacationTo = $hourlyVacationTo;
+        $this->hourlyVacationDuration = Carbon::parse($this->hourlyVacationFrom)->diff(Carbon::parse($this->hourlyVacationTo));
+        // $this->hourlyVacationDuration = $this->hourlyVacationDuration->h . " H :" . $this->hourlyVacationDuration->i . " M";
+        $this->hourlyVacationDuration = $this->hourlyVacationDuration->h . " : " . $this->hourlyVacationDuration->i;
+    }
+
+
     // Show new daily vacation
     public function show_new_daily_vacation_form()
     {
         $this->dailyVacationInfo = [];
+        $this->employeeFullName = "....... ....... .......";
+        $this->dailyVacationDuration = ".......";
+
         $this->showEditVacationForm = false;
         $this->dispatchBrowserEvent('show_new_daily_vacation_form');
     }
@@ -76,8 +116,7 @@ class VacationsList extends Component
             'reason' => 'required',
         ])-> validate();
 
-        $validatedData['duration'] = Carbon::parse($validatedData['from'])->diff(Carbon::parse($validatedData['to']))->days;
-        $validatedData['duration']++;
+        $validatedData['duration'] = $this->dailyVacationDuration;
 
         Dailyvacation::create($validatedData);
 
@@ -88,6 +127,9 @@ class VacationsList extends Component
     public function show_new_hourly_vacation_form()
     {
         $this->hourlyVacationInfo = [];
+        $this->employeeFullName = "....... ....... .......";
+        $this->hourlyVacationDuration = "__ : __";
+
         $this->showEditVacationForm = false;
         $this->dispatchBrowserEvent('show_new_hourly_vacation_form');
     }
