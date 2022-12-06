@@ -84,7 +84,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="employeeid">ID</label>
-                        <input wire:model.defer="dailyVacationInfo.employeeid" type="text" class="form-control @error('employeeid') is-invalid @enderror" id="employeeid" placeholder="Enter Employee ID">
+                        <input wire:model.defer="dailyVacationInfo.employeeid" wire:model.lazy="employeeId" type="text" class="form-control @error('employeeid') is-invalid @enderror" id="employeeid" placeholder="Enter Employee ID">
                         @error('employeeid')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -93,7 +93,7 @@
                     </div>
                     <div class="form-group col-md-9">
                         <label for="fullname">Full name</label>
-                        <input wire:model.defer="perInfo.fullname" type="text" class="form-control @error('fullname') is-invalid @enderror" id="fullname" placeholder="" disabled>
+                        <input wire:model="employeeFullName" type="text" class="form-control @error('fullname') is-invalid @enderror" id="fullname" placeholder="{{ $employeeFullName }}" disabled>
                         @error('fullname')
                         <div class="invalid-feedback">
                             {{ $message }}

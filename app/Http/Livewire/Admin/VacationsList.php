@@ -19,7 +19,8 @@ class VacationsList extends Component
 
     // Objects
     public $employee;
-    public $perInfo=[];
+    public $employeeId = null;
+    public $employeeFullName = "Automatically generate";
     public $dailyVacationInfo=[];
     public $hourlyVacationInfo=[];
     public $employeeVacationInfo = [];
@@ -44,6 +45,13 @@ class VacationsList extends Component
         return view('livewire.admin.vacations-list', [
             'employees' => $employees, 'dailyvacations' => $dailyvacations, 'hourlyvacations' => $hourlyvacations,
         ]);
+    }
+
+    // Find employee fullname
+    public function updatedEmployeeId($employeeId)
+    {
+        $employee = Employee::findOrFail($employeeId);
+        $this->employeeFullName = $employee->fullname;
     }
 
     // Show new daily vacation
