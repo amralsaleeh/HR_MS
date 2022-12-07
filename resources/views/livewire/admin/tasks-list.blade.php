@@ -84,7 +84,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="employeeid">ID</label>
-                        <input wire:model.defer="dailyTaskInfo.employeeid" type="text" class="form-control @error('employeeid') is-invalid @enderror" id="employeeid" placeholder="Enter employee ID">
+                        <input wire:model.defer="dailyTaskInfo.employeeid" wire:model.lazy="employeeId" type="text" class="form-control @error('employeeid') is-invalid @enderror" id="employeeid" placeholder="Enter employee ID">
                         @error('employeeid')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -93,7 +93,7 @@
                     </div>
                     <div class="form-group col-md-9">
                         <label for="fullname">Full name</label>
-                        <input wire:model.defer="perInfo.fullname" type="text" class="form-control @error('fullname') is-invalid @enderror" id="fullname" placeholder="" disabled>
+                        <input wire:model="employeeFullName" type="text" class="form-control @error('fullname') is-invalid @enderror" id="fullname" placeholder="" disabled>
                         @error('fullname')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -114,7 +114,7 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="from">From</label>
-                        <input wire:model.defer="dailyTaskInfo.from" type="text" class="form-control @error('from') is-invalid @enderror" id="from" placeholder="YYYY-MM-DD">
+                        <input wire:model.defer="dailyTaskInfo.from" wire:model.lazy="dailyTaskFrom" type="text" class="form-control @error('from') is-invalid @enderror" id="from" placeholder="YYYY-MM-DD">
                         @error('from')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -123,7 +123,7 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="to">To</label>
-                        <input wire:model.defer="dailyTaskInfo.to" type="text" class="form-control @error('to') is-invalid @enderror" id="to" placeholder="YYYY-MM-DD">
+                        <input wire:model.defer="dailyTaskInfo.to" wire:model.lazy="dailyTaskTo" type="text" class="form-control @error('to') is-invalid @enderror" id="to" placeholder="YYYY-MM-DD">
                         @error('to')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -132,7 +132,7 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="duration">Duration</label>
-                        <input wire:model.defer="dailyTaskInfo.duration" type="text" class="form-control @error('duration') is-invalid @enderror" id="duration" placeholder="" disabled>
+                        <input wire:model="dailyTaskDuration" type="text" class="form-control @error('duration') is-invalid @enderror" id="duration" placeholder="" disabled>
                         @error('duration')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -216,7 +216,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="employeeid">ID</label>
-                        <input wire:model.defer="hourlyTaskInfo.employeeid" type="text" class="form-control @error('employeeid') is-invalid @enderror" id="employeeid" placeholder="Enter Employee ID">
+                        <input wire:model.defer="hourlyTaskInfo.employeeid" wire:model.lazy="employeeId" type="text" class="form-control @error('employeeid') is-invalid @enderror" id="employeeid" placeholder="Enter Employee ID">
                         @error('employeeid')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -225,7 +225,7 @@
                     </div>
                     <div class="form-group col-md-9">
                         <label for="fullname">Full name</label>
-                        <input wire:model.defer="perInfo.fullname" type="text" class="form-control @error('fullname') is-invalid @enderror" id="fullname" placeholder="" disabled>
+                        <input wire:model="employeeFullName" type="text" class="form-control @error('fullname') is-invalid @enderror" id="fullname" placeholder="" disabled>
                         @error('fullname')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -255,7 +255,7 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="from">From</label>
-                        <input wire:model.defer="hourlyTaskInfo.from" type="text" class="form-control @error('from') is-invalid @enderror" id="from" placeholder="HH:MM">
+                        <input wire:model.defer="hourlyTaskInfo.from" wire:model.lazy="hourlyTaskFrom" type="text" class="form-control @error('from') is-invalid @enderror" id="from" placeholder="HH:MM">
                         @error('from')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -264,7 +264,7 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="to">To</label>
-                        <input wire:model.defer="hourlyTaskInfo.to" type="text" class="form-control @error('to') is-invalid @enderror" id="to" placeholder="HH:MM">
+                        <input wire:model.defer="hourlyTaskInfo.to" wire:model.lazy="hourlyTaskTo" type="text" class="form-control @error('to') is-invalid @enderror" id="to" placeholder="HH:MM">
                         @error('to')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -273,7 +273,7 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="duration">Duration</label>
-                        <input wire:model.defer="hourlyTaskInfo.duration" type="text" class="form-control @error('duration') is-invalid @enderror" id="duration" placeholder="" disabled>
+                        <input wire:model="hourlyTaskDuration" type="text" class="form-control @error('duration') is-invalid @enderror" id="duration" placeholder="" disabled>
                         @error('duration')
                         <div class="invalid-feedback">
                             {{ $message }}

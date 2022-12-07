@@ -19,9 +19,20 @@ class TasksList extends Component
 
     // Objects
     public $employee;
-    public $perInfo=[];
+
+    public $employeeId = null;
+    public $employeeFullName = null;
+
     public $dailyTaskInfo=[];
+    public $dailyTaskFrom = null;
+    public $dailyTaskTo = null;
+    public $dailyTaskDuration = null;
+
     public $hourlyTaskInfo=[];
+    public $hourlyTaskFrom = null;
+    public $hourlyTaskTo = null;
+    public $hourlyTaskDuration = null;
+
     public $employeeTaskInfo = [];
     public $showEditTaskForm = false;
 
@@ -46,10 +57,46 @@ class TasksList extends Component
         ]);
     }
 
+    // Find employee fullname
+    public function updatedEmployeeId($employeeId)
+    {
+        $employee = Employee::findOrFail($employeeId);
+        $this->employeeFullName = $employee->fullname;
+    }
+
+    // Insert from for daily task
+    public function updateddailyTaskFrom($dailyTaskFrom)
+    {
+        $this->dailyTaskFrom = $dailyTaskFrom;
+    }
+    // Insert to for daily task
+    public function updateddailyTaskTo($dailyTaskTo)
+    {
+        $this->dailyTaskTo = $dailyTaskTo;
+        $this->dailyTaskDuration = Carbon::parse($this->dailyTaskFrom)->diff(Carbon::parse($this->dailyTaskTo))->days + 1;
+    }
+
+    // Insert from for hourly task
+    public function updatedhourlyTaskFrom($hourlyTaskFrom)
+    {
+        $this->hourlyTaskFrom = $hourlyTaskFrom;
+    }
+    // Insert to for hourly task
+    public function updatedhourlyTaskTo($hourlyTaskTo)
+    {
+        $this->hourlyTaskTo = $hourlyTaskTo;
+        $this->hourlyTaskDuration = Carbon::parse($this->hourlyTaskFrom)->diff(Carbon::parse($this->hourlyTaskTo));
+        // $this->hourlyTaskDuration = $this->hourlyTaskDuration->h . " H :" . $this->hourlyTaskDuration->i . " M";
+        $this->hourlyTaskDuration = $this->hourlyTaskDuration->h . " : " . $this->hourlyTaskDuration->i;
+    }
+
     // Show new daily task
     public function show_new_daily_task_form()
     {
         $this->dailyTaskInfo = [];
+        $this->employeeFullName = "....... ....... .......";
+        $this->dailyTaskDuration = ".......";
+
         $this->showEditTaskForm = false;
         $this->dispatchBrowserEvent('show_new_daily_task_form');
     }
@@ -69,8 +116,7 @@ class TasksList extends Component
             'reason' => 'required',
         ])-> validate();
 
-        $validatedData['duration'] = Carbon::parse($validatedData['from'])->diff(Carbon::parse($validatedData['to']))->days;
-        $validatedData['duration']++;
+        $validatedData['duration'] = $this->dailyTaskDuration;
 
         Dailytask::create($validatedData);
 
@@ -81,6 +127,9 @@ class TasksList extends Component
     public function show_new_hourly_task_form()
     {
         $this->hourlyTaskInfo = [];
+        $this->employeeFullName = "....... ....... .......";
+        $this->hourlyTaskDuration = "__ : __";
+
         $this->showEditTaskForm = false;
         $this->dispatchBrowserEvent('show_new_hourly_task_form');
     }
