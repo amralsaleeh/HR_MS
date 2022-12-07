@@ -27,7 +27,7 @@
 
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini sidebar-collapse">
 <div class="wrapper">
 
   <!-- Preloader -->
@@ -85,12 +85,19 @@
 {{-- <script>
     $.widget.bridge('uibutton', $.ui.button)
 </script> --}}
+
 {{-- <script>
     $(document).ready( function() {
         $('#birthdate').datetimepicker({
             format: 'YYYY-MM-DD',
             viewMode: 'years'
         })
+
+        $('#birthdate').on("change.datetimepicker", function(e)
+        {
+            alert('he');
+        }
+        )
     })
 </script> --}}
 

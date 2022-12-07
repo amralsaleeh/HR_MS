@@ -2,13 +2,14 @@
     <!-- Brand Logo -->
     <a href="dashboard" class="brand-link">
       <img src="{{ asset ('backend/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">HR - System</span>
+      <span class="brand-text font-weight-light">Human Resource - Sys</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
+
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img src="{{ asset ('backend/dist/img/user-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
@@ -16,7 +17,7 @@
           <a class="d-block">Amr Alsaleh</a>
           <a href="logout" class="fa-solid fa-arrow-right-from-bracket ml-3"></a>
         </div>
-      </div>
+      </div> --}}
 
       <!-- SidebarSearch Form -->
       {{-- <div class="form-inline">

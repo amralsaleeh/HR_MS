@@ -130,7 +130,6 @@
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="id">ID</label>
-                        {{-- <input wire:model.defer="perInfo.id" type="text" class="form-control @error('id') is-invalid @enderror" id="id" placeholder="Automatically generate" disabled> --}}
                         <input wire:model.defer="perInfo.id" type="text" class="form-control @error('id') is-invalid @enderror" id="id" placeholder="Enter Employee Code">
                         @error('id')
                         <div class="invalid-feedback">
