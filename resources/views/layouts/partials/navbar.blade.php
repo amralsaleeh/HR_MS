@@ -8,16 +8,18 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        <div class="user-panel d-flex">
+
+        <!-- User -->
+        <li class="user-panel d-flex">
             <div class="image">
                 <img src="{{ asset ('backend/dist/img/user-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="nav-link info d-flex justify-content-center align-items-center">
                 <span class="d-block">Amr Alsaleh</span>
-                <a href="logout" class="fa-solid fa-arrow-right-from-bracket ml-4" {{-- style="color: rgba(0,0,0,.5);" --}}></a>
             </div>
-        </div>
-      <!-- Navbar Search -->
+        </li>
+
+        <!-- Navbar Search -->
         <li class="nav-item">
             <a class="nav-link" data-widget="navbar-search" href="#" role="button">
             <i class="fas fa-search"></i>
@@ -97,6 +99,7 @@
             <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
             </div>
         </li> --}}
+
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
@@ -124,10 +127,19 @@
             <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
         </li>
-        <li class="nav-item">
+
+        {{-- Fullscreen --}}
+        {{-- <li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">
             <i class="fas fa-expand-arrows-alt"></i>
             </a>
+        </li> --}}
+
+        {{-- Logout --}}
+        <li class="nav-item">
+            <a class="nav-link" data-widget="logout" href="logout" role="button">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </a>
         </li>
-        </ul>
+    </ul>
 </nav>
