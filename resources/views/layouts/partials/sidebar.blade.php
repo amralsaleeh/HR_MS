@@ -47,6 +47,14 @@
             </li>
             <hr style="width:200px;background: rgb(111, 111, 111);">
             <li class="nav-item">
+              <a href="{{ route('employees') }}" class="nav-link {{ request()->is('employees') ? 'active' : '' }} ">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>
+                  Employees
+                  </p>
+              </a>
+          </li>
+            <li class="nav-item">
                 <a href="{{ route('attendees') }}" class="nav-link {{ request()->is('attendees') ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-solid fa-fingerprint"></i>
                     <p>
@@ -64,16 +72,24 @@
             </li>
             <hr style="width:200px;background: rgb(111, 111, 111);">
             <li class="nav-item">
-                <a href="{{ route('employees') }}" class="nav-link {{ request()->is('employees') ? 'active' : '' }} ">
-                    <i class="nav-icon fas fa-id-card"></i>
-                    <p>
-                    Employees
-                    </p>
-                </a>
-            </li>
+              <a href="{{ route('centers') }}" class="nav-link {{ request()->is('centers') ? 'active' : '' }} ">
+                  <i class="nav-icon fa-sharp fa-solid fa-building-columns"></i>
+                  <p>
+                  Centers
+                  </p>
+              </a>
+          </li>
+          <li class="nav-item">
+              <a href="{{ route('departments') }}" class="nav-link {{ request()->is('departments') ? 'active' : '' }} ">
+                  <i class="nav-icon fa fa-building" aria-hidden="true"></i>
+                  <p>
+                  Departments
+                  </p>
+              </a>
+          </li>
             <li class="nav-item">
                 <a href="{{ route('positions') }}" class="nav-link {{ request()->is('positions') ? 'active' : '' }} ">
-                    <i class="nav-icon fas fa-users"></i>
+                    <i class="nav-icon fa-solid fa-map-pin"></i>
                     <p>
                     Positions
                     </p>

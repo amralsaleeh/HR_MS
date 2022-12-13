@@ -11,8 +11,8 @@ class Position extends Model
 
     protected $fillable = [
         'id',
-        'positionname',
-        'numberofvacancies',
+        'positionName',
+        'numberOfVacancies',
     ];
 
     protected $hidden = [

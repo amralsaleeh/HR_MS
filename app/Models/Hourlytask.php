@@ -10,9 +10,9 @@ class Hourlytask extends Model
     use HasFactory;
 
     protected $fillable = [
-        'employeeid',
-        'requestdate',
-        'taskdate',
+        'employeeId',
+        'requestDate',
+        'taskDate',
         'from',
         'to',
         'duration',

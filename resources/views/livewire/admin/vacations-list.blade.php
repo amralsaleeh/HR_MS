@@ -43,7 +43,7 @@
                             <tbody>
                                 @foreach ($employees as $employee)
                                     <tr>
-                                        <td>{{ @$employee->fullname }}</td>
+                                        <td>{{ @$employee->fullName }}</td>
                                         <td>{{ $dailyvacations->get($employee->id) + $hourlyvacations->get($employee->id) }}</td>
                                         <td>
                                             <a wire:click.prevent="show_employee_vacation_form( {{ $employee->id }} )" href=""><i class="fa-solid fa-folder-open"></i></a>
@@ -83,18 +83,18 @@
             <div class="modal-body">
                 <div class="form-row">
                     <div class="form-group col-md-3">
-                        <label for="employeeid">ID</label>
-                        <input wire:model.defer="dailyVacationInfo.employeeid" wire:model.lazy="employeeId" type="text" class="form-control @error('employeeid') is-invalid @enderror" id="employeeid" placeholder="Enter Employee ID">
-                        @error('employeeid')
+                        <label for="employeeId">ID</label>
+                        <input wire:model.defer="dailyVacationInfo.employeeId" wire:model.lazy="employeeId" type="text" class="form-control @error('employeeId') is-invalid @enderror" id="employeeId" placeholder="Enter Employee ID">
+                        @error('employeeId')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                         @enderror
                     </div>
                     <div class="form-group col-md-9">
-                        <label for="fullname">Full name</label>
-                        <input wire:model="employeeFullName" type="text" class="form-control @error('fullname') is-invalid @enderror" id="fullname" disabled>
-                        @error('fullname')
+                        <label for="fullName">Full name</label>
+                        <input wire:model="employeeFullName" type="text" class="form-control @error('fullName') is-invalid @enderror" id="fullName" disabled>
+                        @error('fullName')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -104,9 +104,9 @@
                         <hr>
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="requestdate">Request Date</label>
-                        <input wire:model.defer="dailyVacationInfo.requestdate" type="text" class="form-control @error('requestdate') is-invalid @enderror" id="requestdate" placeholder="YYYY-MM-DD">
-                        @error('requestdate')
+                        <label for="requestDate">Request Date</label>
+                        <input wire:model.defer="dailyVacationInfo.requestDate" type="text" class="form-control @error('requestDate') is-invalid @enderror" id="requestDate" placeholder="YYYY-MM-DD">
+                        @error('requestDate')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -140,13 +140,13 @@
                         @enderror
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="isauthorization">Authorization</label>
-                        <select wire:model.defer="dailyVacationInfo.isauthorization" class="custom-select rounded-0 @error('isauthorization') is-invalid @enderror" id="isauthorization">
-                            <option selected>Is isauthorization:</option>
+                        <label for="isAuthorization">Authorization</label>
+                        <select wire:model.defer="dailyVacationInfo.isAuthorization" class="custom-select rounded-0 @error('isAuthorization') is-invalid @enderror" id="isAuthorization">
+                            <option selected>Is Authorization?</option>
                             <option value="0">No</option>
                             <option value="1">Yes</option>
                         </select>
-                            @error('isauthorization')
+                            @error('isAuthorization')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -215,18 +215,18 @@
             <div class="modal-body">
                 <div class="form-row">
                     <div class="form-group col-md-3">
-                        <label for="employeeid">ID</label>
-                        <input wire:model.defer="hourlyVacationInfo.employeeid" wire:model.lazy="employeeId" type="text" class="form-control @error('employeeid') is-invalid @enderror" id="employeeid" placeholder="Enter Employee Code">
-                        @error('employeeid')
+                        <label for="employeeId">ID</label>
+                        <input wire:model.defer="hourlyVacationInfo.employeeId" wire:model.lazy="employeeId" type="text" class="form-control @error('employeeId') is-invalid @enderror" id="employeeId" placeholder="Enter Employee Code">
+                        @error('employeeId')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                         @enderror
                     </div>
                     <div class="form-group col-md-9">
-                        <label for="fullname">Full name</label>
-                        <input wire:model="employeeFullName" type="text" class="form-control @error('fullname') is-invalid @enderror" id="fullname" disabled>
-                        @error('fullname')
+                        <label for="fullName">Full name</label>
+                        <input wire:model="employeeFullName" type="text" class="form-control @error('fullName') is-invalid @enderror" id="fullName" disabled>
+                        @error('fullName')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -236,18 +236,18 @@
                         <hr>
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="requestdate">Request Date</label>
-                        <input wire:model.defer="hourlyVacationInfo.requestdate" type="text" class="form-control @error('requestdate') is-invalid @enderror" id="requestdate" placeholder="YYYY-MM-DD">
-                        @error('requestdate')
+                        <label for="requestDate">Request Date</label>
+                        <input wire:model.defer="hourlyVacationInfo.requestDate" type="text" class="form-control @error('requestDate') is-invalid @enderror" id="requestDate" placeholder="YYYY-MM-DD">
+                        @error('requestDate')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                         @enderror
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="vacationdate">Vacation Date</label>
-                        <input wire:model.defer="hourlyVacationInfo.vacationdate" type="text" class="form-control @error('vacationdate') is-invalid @enderror" id="vacationdate" placeholder="YYYY-MM-DD">
-                        @error('vacationdate')
+                        <label for="vacationDate">Vacation Date</label>
+                        <input wire:model.defer="hourlyVacationInfo.vacationDate" type="text" class="form-control @error('vacationDate') is-invalid @enderror" id="vacationDate" placeholder="YYYY-MM-DD">
+                        @error('vacationDate')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -327,7 +327,7 @@
             <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                    <span>{{ $employee->fullname }} / Vacations</span>
+                    <span>{{ $employee->fullName }} / Vacations</span>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>

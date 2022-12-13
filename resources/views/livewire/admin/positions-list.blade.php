@@ -22,7 +22,7 @@
             <div class="col-lg-4 col-4">
                 <div class="small-box bg-success">
                 <div class="inner">
-                    <h3> {{ count($results) }} </h3>
+                    <h3> {{ $positions->total() }} </h3>
 
                     <p>All Positions</p>
                 </div>
@@ -34,7 +34,7 @@
             <div class="col-lg-4 col-4">
                 <div class="small-box bg-info">
                 <div class="inner">
-                    <h3> {{ count($results) }} </h3>
+                    <h3> {{ $positions->total() }} </h3>
 
                     <p>All Vacancies</p>
                 </div>
@@ -46,8 +46,7 @@
             <div class="col-lg-4 col-4">
                 <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3> {{ count($results) }} </h3>
-
+                    <h3> {{ $positions->total() }} </h3>
                     <p>Empty Vacancies</p>
                 </div>
                 <div class="icon">
@@ -61,11 +60,44 @@
             <div class="col-lg-12">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <div class="d-flex justify-content-end">
-                            {{-- <button wire:click.prevent="show_new_employer_form" class="btn btn-primary">
-                                <i class="fa fa-plus-circle mr-2"></i> Add New Employer
-                            </button> --}}
-                        </div>
+                        <form wire:submit.prevent="{{ $showEditPositionForm? 'edit_position' : 'newPositionForm' }}" autocomplete="off">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                @if ($showEditPositionForm)
+                                    <span>Edit Position</span>
+                                @else
+                                    <span>Add New Position</span>
+                                @endif
+                            </h5>
+                            <br>
+                            <div class="d-flex justify-content-between">
+                                <div class="col-5">
+                                    <input wire:model.defer="perInfo.positionName" type="text" class="form-control @error('positionName') is-invalid @enderror" id="positionName" placeholder="Position Name">
+                                    @error('positionName')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                                <div class="col-5">
+                                    <input wire:model.defer="perInfo.numberOfVacancies" type="text" class="form-control @error('numberOfVacancies') is-invalid @enderror" id="numberOfVacancies" placeholder="Vacancies Number">
+                                    @error('numberOfVacancies')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                                <div class="col-2">
+                                    <button class="btn btn-primary">
+                                        <i class="fa fa-plus-circle mr-2"></i>
+                                        @if ($showEditPositionForm)
+                                        <span>Save Changes</span>
+                                        @else
+                                            <span>Save</span>
+                                        @endif
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <div class="card-body">
 
@@ -79,14 +111,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach ($results as $result)
+                                @foreach ($positions as $position)
                                     <tr>
-                                        <td>{{ $result->positionname }}</td>
-                                        <td>{{ $result->numberofvacancies }}</td>
+                                        <td>{{ $position->positionName }}</td>
+                                        <td>{{ $position->numberOfVacancies }}</td>
                                         <td>1</td>
 
                                         <td>
-                                            <a wire:click.prevent="show_edit_employer_form(  )" href=""><i class="fa-solid fa-folder-open"></i></a>
+                                            <a wire:click.prevent="show_edit_employer_form(  )" href=""><i class="fa-solid fa-folder-open text-success mr-2"></i></a>
+                                            <a wire:click.prevent="show_edit_position_form( {{ $position }} )" href=""><i class="fa fa-edit mr-2"></i></a>
+                                            <a wire:click.prevent="show_conformation_model( {{ $position->id }} )" href=""><i class="fa fa-trash text-danger"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -95,7 +129,7 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-centerid">
-                        {{-- {{ $results->links() }} --}}
+                        {{-- {{ $positions->links() }} --}}
                     </div>
                 </div>
             </div>
@@ -103,149 +137,18 @@
         </div>
     </div>
 
-    {{-- Employer form --}}
-    {{-- <div wire:ignore.self class="modal fade" id="employer-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-        <form wire:submit.prevent="{{ $showEditEmployerForm ? 'edit_employer' : 'new_employer' }}" autocomplete="off">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
-                @if ($showEditEmployerForm)
-                    <span>Edit employer</span>
-                @else
-                    <span>Add new employer</span>
-                @endif
-              </h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="id">ID</label>
-                        <input wire:model.defer="perInfo.id" type="text" class="form-control @error('id') is-invalid @enderror" id="id" placeholder="Automatically generate" disabled>
-                        @error('id')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="fullname">Full name</label>
-                        <input wire:model.defer="perInfo.fullname" type="text" class="form-control @error('fullname') is-invalid @enderror" id="fullname" placeholder="Enter full name">
-                        @error('fullname')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="birthdate">Birth date</label>
-                        <input wire:model.defer="perInfo.birthdate" type="text" class="form-control @error('birthdate') is-invalid @enderror" id="birthdate" placeholder="YYYY-MM-DD">
-                        @error('birthdate')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="nationalnumber">National Number</label>
-                        <input wire:model.defer="perInfo.nationalnumber" type="text" class="form-control @error('nationalnumber') is-invalid @enderror" id="nationalnumber" placeholder="02000000000">
-                        @error('nationalnumber')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div><div class="form-group col-md-4">
-                        <label for="phonenumber">Phone Number</label>
-                        <input wire:model.defer="perInfo.phonenumber" type="text" class="form-control @error('phonenumber') is-invalid @enderror" id="phonenumber" placeholder="0900 000 000">
-                        @error('phonenumber')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="startdate">Start date</label>
-                        <input wire:model.defer="perInfo.startdate" type="text" class="form-control @error('startdate') is-invalid @enderror" id="startdate" placeholder="YYYY-MM-DD">
-                        @error('startdate')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="positionid">Position</label>
-                        <select wire:model.defer="perInfo.positionid" class="custom-select rounded-0 @error('positionid') is-invalid @enderror" id="positionid">
-                            <option selected>Choose Position ID</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                          </select>
-                          @error('positionid')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="departmentid">Department</label>
-                        <select wire:model.defer="perInfo.departmentid" class="custom-select rounded-0 @error('departmentid') is-invalid @enderror" id="departmentid">
-                            <option selected>Choose Department ID</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                          </select>
-                          @error('departmentid')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="centerid">Center</label>
-                        <select wire:model.defer="perInfo.centerid" class="custom-select rounded-0 @error('centerid') is-invalid @enderror" id="centerid">
-                            <option selected>Choose Center ID</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                          </select>
-                          @error('centerid')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancel</button>
-                <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i>
-                    @if ($showEditEmployerForm)
-                        <span>Save Changes</span>
-                    @else
-                        <span>Save</span>
-                    @endif
-                </button>
-            </div>
-          </div>
-        </form>
-        </div>
-    </div> --}}
-
     {{-- Conformation model --}}
-    {{-- <div wire:ignore.self class="modal fade" id="conformation-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="conformation-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Delete employer</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Delete Position</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-                <h5>Are you sure you want to delete this employer?</h5>
+                <h5>Are you sure you want to delete this position?</h5>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i>Cancel</button>
@@ -253,5 +156,5 @@
             </div>
           </div>
         </div>
-    </div> --}}
+    </div>
 </div>

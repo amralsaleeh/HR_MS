@@ -14,7 +14,7 @@ class AddForeignKeysToHourlyvacationsTable extends Migration
     public function up()
     {
         Schema::table('hourlyvacations', function (Blueprint $table) {
-            $table->foreign(['employeeid'], 'FKhourlyvacations692359')->references(['id'])->on('employees');
+            $table->foreign(['employeeId'], 'FKhourlyvacations692359')->references(['id'])->on('employees');
         });
     }
 

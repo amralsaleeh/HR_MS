@@ -14,9 +14,10 @@ class AddForeignKeysToEmployeeTable extends Migration
     public function up()
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->foreign(['positionid'], 'FKemployees650198')->references(['id'])->on('positions');
-            $table->foreign(['centerid'], 'FKemployees962608')->references(['id'])->on('centers');
-            $table->foreign(['departmentid'], 'FKemployees839638')->references(['id'])->on('departments');
+            $table->foreign(['earlyPositionId'], 'FKpositions650197')->references(['id'])->on('positions');
+            $table->foreign(['positionId'], 'FKemployees650198')->references(['id'])->on('positions');
+            $table->foreign(['centerId'], 'FKemployees962608')->references(['id'])->on('centers');
+            $table->foreign(['departmentId'], 'FKemployees839638')->references(['id'])->on('departments');
         });
     }
 
@@ -28,6 +29,7 @@ class AddForeignKeysToEmployeeTable extends Migration
     public function down()
     {
         Schema::table('employees', function (Blueprint $table) {
+            $table->dropForeign('FKpositions650197');
             $table->dropForeign('FKemployees650198');
             $table->dropForeign('FKemployees962608');
             $table->dropForeign('FKemployees839638');

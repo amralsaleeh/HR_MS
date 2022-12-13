@@ -10,12 +10,12 @@ class Dailytask extends Model
     use HasFactory;
 
     protected $fillable = [
-        'employeeid',
-        'requestdate',
+        'employeeId',
+        'requestDate',
         'from',
         'to',
         'duration',
-        'isauthorization',
+        'isAuthorization',
         'type',
         'reason',
     ];

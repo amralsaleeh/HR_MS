@@ -15,9 +15,9 @@ class CreateHourlyvacationsTable extends Migration
     {
         Schema::create('hourlyvacations', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->integer('employeeid')->index('FKhourlyvacations692359');
-            $table->date('requestdate');
-            $table->date('vacationdate');
+            $table->integer('employeeId')->index('FKhourlyvacations692359');
+            $table->date('requestDate');
+            $table->date('vacationDate');
             $table->time('from');
             $table->time('to');
             $table->time('duration');

@@ -15,8 +15,9 @@ class CreateAttendeesTable extends Migration
     {
         Schema::create('attendees', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->integer('employeeid')->index('FKattendees76090');
-            $table->date('logdate');
+            $table->integer('employeeId')->index('FKattendees76090');
+            $table->date('logDate');
+            $table->date('logTime');
             $table->time('login');
             $table->time('logout');
             $table->time('duration');

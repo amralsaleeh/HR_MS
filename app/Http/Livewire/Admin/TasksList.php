@@ -42,15 +42,15 @@ class TasksList extends Component
         $employees = Employee::paginate(10);
 
         $dailytasks = DB::table('dailytasks')
-            ->join('employees', 'employees.id', '=', 'dailytasks.employeeid')
+            ->join('employees', 'employees.id', '=', 'dailytasks.employeeId')
             ->get();
 
         $hourlytasks = DB::table('hourlytasks')
-            ->join('employees', 'employees.id', '=', 'hourlytasks.employeeid')
+            ->join('employees', 'employees.id', '=', 'hourlytasks.employeeId')
             ->get();
 
-        $dailytasks = $dailytasks->countBy('employeeid');
-        $hourlytasks = $hourlytasks->countBy('employeeid');
+        $dailytasks = $dailytasks->countBy('employeeId');
+        $hourlytasks = $hourlytasks->countBy('employeeId');
 
         return view('livewire.admin.tasks-list', [
             'employees' => $employees, 'dailytasks' => $dailytasks, 'hourlytasks' => $hourlytasks,
@@ -61,7 +61,7 @@ class TasksList extends Component
     public function updatedEmployeeId($employeeId)
     {
         $employee = Employee::findOrFail($employeeId);
-        $this->employeeFullName = $employee->fullname;
+        $this->employeeFullName = $employee->fullName;
     }
 
     // Insert from for daily task
@@ -106,12 +106,12 @@ class TasksList extends Component
     {
 
         $validatedData =  Validator::make($this->dailyTaskInfo, [
-            'employeeid' => 'required',
-            'requestdate' => 'required',
+            'employeeId' => 'required',
+            'requestDate' => 'required',
             'from' => 'required',
             'to' => 'required',
             'duration' => 'nullable',
-            'isauthorization' => 'required',
+            'isAuthorization' => 'required',
             'type' => 'required',
             'reason' => 'required',
         ])-> validate();
@@ -139,9 +139,9 @@ class TasksList extends Component
     {
 
         $validatedData =  Validator::make($this->hourlyTaskInfo, [
-            'employeeid' => 'required',
-            'requestdate' => 'required',
-            'taskdate' => 'required',
+            'employeeId' => 'required',
+            'requestDate' => 'required',
+            'taskDate' => 'required',
             'from' => 'required',
             'to' => 'required',
             'duration' => 'nullable',
@@ -163,12 +163,12 @@ class TasksList extends Component
         $this->employeeTaskInfo = [];
 
         $dailytasks = DB::table('dailytasks')
-            ->join('employees', 'employees.id', '=', 'dailytasks.employeeid')
-            ->where('employeeid', '=', $employeeId)->get();
+            ->join('employees', 'employees.id', '=', 'dailytasks.employeeId')
+            ->where('employeeId', '=', $employeeId)->get();
 
         $hourlytasks = DB::table('hourlytasks')
-            ->join('employees', 'employees.id', '=', 'hourlytasks.employeeid')
-            ->where('employeeid', '=', $employeeId)->get();
+            ->join('employees', 'employees.id', '=', 'hourlytasks.employeeId')
+            ->where('employeeId', '=', $employeeId)->get();
 
         $this->dispatchBrowserEvent('show_employee_tasks_form');
     }

@@ -14,7 +14,7 @@ class AddForeignKeysToDailytasksTable extends Migration
     public function up()
     {
         Schema::table('dailytasks', function (Blueprint $table) {
-            $table->foreign(['employeeid'], 'FKdailytasks577353')->references(['id'])->on('employees');
+            $table->foreign(['employeeId'], 'FKdailytasks577353')->references(['id'])->on('employees');
         });
     }
 

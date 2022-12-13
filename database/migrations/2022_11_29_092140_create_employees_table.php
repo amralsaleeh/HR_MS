@@ -15,20 +15,25 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->string('fullname')->nullable();
-            $table->string('nationalnumber')->unique('nationalnumber');
-            $table->string('firstname');
-            $table->string('fathername');
-            $table->string('lastname');
-            $table->string('mothername');
-            $table->string('phonenumber')->unique('phonenumber');
-            $table->date('birthdate');
-            $table->date('startdate');
+            $table->string('fullName')->nullable();
+            $table->string('nationalNumber')->unique('nationalNumber');
+            $table->string('firstName');
+            $table->string('fatherName');
+            $table->string('lastName');
+            $table->string('motherName');
+            $table->string('degree')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phoneNumber')->unique('phoneNumber');
+            $table->string('birthAndPlace');
             $table->boolean('gender');
-            $table->integer('isactive');
-            $table->integer('positionid')->index('FKpositions650198')->nullable();;
-            $table->integer('departmentid')->index('FKdepartmens839638')->nullable();;
-            $table->integer('centerid')->index('FKcenters962608')->nullable();;
+            $table->date('startDate');
+            $table->date('quitDate');
+            $table->integer('isActive');
+            $table->longText('notes')->nullable();
+            $table->integer('earlyPositionId')->index('FKpositions650197')->nullable();
+            $table->integer('positionId')->index('FKpositions650198')->nullable();
+            $table->integer('departmentId')->index('FKdepartmens839638')->nullable();
+            $table->integer('centerId')->index('FKcenters962608')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
         });

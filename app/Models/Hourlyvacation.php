@@ -10,9 +10,9 @@ class Hourlyvacation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'employeeid',
-        'requestdate',
-        'vacationdate',
+        'employeeId',
+        'requestDate',
+        'vacationDate',
         'from',
         'to',
         'duration',

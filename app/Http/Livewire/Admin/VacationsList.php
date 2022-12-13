@@ -42,15 +42,15 @@ class VacationsList extends Component
         $employees = Employee::paginate(10);
 
         $dailyvacations = DB::table('dailyvacations')
-            ->join('employees', 'employees.id', '=', 'dailyvacations.employeeid')
+            ->join('employees', 'employees.id', '=', 'dailyvacations.employeeId')
             ->get();
 
         $hourlyvacations = DB::table('hourlyvacations')
-            ->join('employees', 'employees.id', '=', 'hourlyvacations.employeeid')
+            ->join('employees', 'employees.id', '=', 'hourlyvacations.employeeId')
             ->get();
 
-        $dailyvacations = $dailyvacations->countBy('employeeid');
-        $hourlyvacations = $hourlyvacations->countBy('employeeid');
+        $dailyvacations = $dailyvacations->countBy('employeeId');
+        $hourlyvacations = $hourlyvacations->countBy('employeeId');
 
         return view('livewire.admin.vacations-list', [
             'employees' => $employees, 'dailyvacations' => $dailyvacations, 'hourlyvacations' => $hourlyvacations,
@@ -61,7 +61,7 @@ class VacationsList extends Component
     public function updatedEmployeeId($employeeId)
     {
         $employee = Employee::findOrFail($employeeId);
-        $this->employeeFullName = $employee->fullname;
+        $this->employeeFullName = $employee->fullName;
     }
 
     // Insert from for daily vacation
@@ -90,7 +90,6 @@ class VacationsList extends Component
         $this->hourlyVacationDuration = $this->hourlyVacationDuration->h . " : " . $this->hourlyVacationDuration->i;
     }
 
-
     // Show new daily vacation
     public function show_new_daily_vacation_form()
     {
@@ -106,12 +105,12 @@ class VacationsList extends Component
     public function new_daily_vacation()
     {
         $validatedData =  Validator::make($this->dailyVacationInfo, [
-            'employeeid' => 'required',
-            'requestdate' => 'required',
+            'employeeId' => 'required',
+            'requestDate' => 'required',
             'from' => 'required',
             'to' => 'required',
             'duration' => 'nullable',
-            'isauthorization' => 'required',
+            'isAuthorization' => 'required',
             'type' => 'required',
             'reason' => 'required',
         ])-> validate();
@@ -138,9 +137,9 @@ class VacationsList extends Component
     public function new_hourly_vacation()
     {
         $validatedData =  Validator::make($this->hourlyVacationInfo, [
-            'employeeid' => 'required',
-            'requestdate' => 'required',
-            'vacationdate' => 'required',
+            'employeeId' => 'required',
+            'requestDate' => 'required',
+            'vacationDate' => 'required',
             'from' => 'required',
             'to' => 'required',
             'duration' => 'nullable',
@@ -162,12 +161,12 @@ class VacationsList extends Component
         $this->employeeVacationInfo = [];
 
         $dailyvacations = DB::table('dailyvacations')
-            ->join('employees', 'employees.id', '=', 'dailyvacations.employeeid')
-            ->where('employeeid', '=', $employeeId)->get();
+            ->join('employees', 'employees.id', '=', 'dailyvacations.employeeId')
+            ->where('employeeId', '=', $employeeId)->get();
 
         $hourlyvacations = DB::table('hourlyvacations')
-            ->join('employees', 'employees.id', '=', 'hourlyvacations.employeeid')
-            ->where('employeeid', '=', $employeeId)->get();
+            ->join('employees', 'employees.id', '=', 'hourlyvacations.employeeId')
+            ->where('employeeId', '=', $employeeId)->get();
 
         $this->dispatchBrowserEvent('show_employee_vacations_form');
     }

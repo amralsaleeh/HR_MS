@@ -15,9 +15,9 @@ class CreateHourlytasksTable extends Migration
     {
         Schema::create('hourlytasks', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->integer('employeeid')->index('FKhourlytasks833137');
-            $table->date('requestdate');
-            $table->date('taskdate');
+            $table->integer('employeeId')->index('FKhourlytasks833137');
+            $table->date('requestDate');
+            $table->date('taskDate');
             $table->time('from');
             $table->time('to');
             $table->time('duration');

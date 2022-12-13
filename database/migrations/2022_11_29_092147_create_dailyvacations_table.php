@@ -15,12 +15,12 @@ class CreateDailyvacationsTable extends Migration
     {
         Schema::create('dailyvacations', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->integer('employeeid')->index('FKdailyvacations896395');
-            $table->date('requestdate');
+            $table->integer('employeeId')->index('FKdailyvacations896395');
+            $table->date('requestDate');
             $table->date('from');
             $table->date('to');
             $table->tinyInteger('duration');
-            $table->tinyInteger('isauthorization');
+            $table->tinyInteger('isAuthorization');
             $table->tinyInteger('type');
             $table->string('reason');
             $table->timestamp('created_at');

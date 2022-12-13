@@ -15,12 +15,12 @@ class CreateDailytasksTable extends Migration
     {
         Schema::create('dailytasks', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->integer('employeeid')->index('FKdailytasks577353');
-            $table->date('requestdate');
+            $table->integer('employeeId')->index('FKdailytasks577353');
+            $table->date('requestDate');
             $table->date('from');
             $table->date('to');
             $table->tinyInteger('duration');
-            $table->tinyInteger('isauthorization');
+            $table->tinyInteger('isAuthorization');
             $table->tinyInteger('type');
             $table->string('reason');
             $table->timestamp('created_at');
