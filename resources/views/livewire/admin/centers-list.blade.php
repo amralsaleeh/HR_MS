@@ -20,14 +20,14 @@
         {{-- Boxes --}}
         <div class="row">
             <div class="col-lg-12 col-12">
-                <div class="small-box bg-success">
+                <div class="small-box bg-info">
                 <div class="inner">
                     <h3> {{ $centers->total() }} </h3>
 
                     <p>All Centers</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
+                    <i class="fa-sharp fa-solid fa-building-columns"></i>
                 </div>
                 </div>
             </div>

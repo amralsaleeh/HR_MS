@@ -20,14 +20,14 @@
         {{-- Boxes --}}
         <div class="row">
             <div class="col-lg-12 col-12">
-                <div class="small-box bg-success">
+                <div class="small-box bg-info">
                 <div class="inner">
                     <h3> {{ $departments->total() }} </h3>
 
                     <p>All Departments</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
+                    <i class="fa fa-building"></i>
                 </div>
                 </div>
             </div>

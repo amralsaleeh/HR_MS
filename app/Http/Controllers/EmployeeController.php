@@ -11,7 +11,7 @@ use App\Models\Employee;
 class EmployeeController extends Controller
 {
 
-    public function import2(Request $request){
+    public function import_employees(Request $request){
 
         $this->validate($request, [
             'file'  => 'required|mimes:xls,xlsx'

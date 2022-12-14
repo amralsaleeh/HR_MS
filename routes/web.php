@@ -32,12 +32,13 @@ Route::get('/', AdminController::class)->name('dashboard');
 Route::get('dashboard', DashboardList::class)->name('dashboard');
 
 Route::get('attendees', AttendeesList::class)->name('attendees');
+// Route::post('/import_attendees',[AttendanceController::class,'import_attendees'])->name('import_attendees');
 Route::post('/import',[AttendanceController::class,'import'])->name('import');  // Change name please
 
 Route::get('discount', DiscountList::class)->name('discount');
 
 Route::get('employees', EmployeesList::class)->name('employees');
-Route::post('/import2',[EmployeeController::class,'import2'])->name('import2'); // Change name please
+Route::post('/import_employees',[EmployeeController::class,'import_employees'])->name('import_employees');
 
 Route::get('centers', CentersList::class)->name('centers');
 Route::get('departments', DepartmentsList::class)->name('departments');

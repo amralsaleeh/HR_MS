@@ -27,7 +27,7 @@ class CreateEmployeesTable extends Migration
             $table->string('birthAndPlace');
             $table->boolean('gender');
             $table->date('startDate');
-            $table->date('quitDate');
+            $table->date('quitDate')->nullable();
             $table->integer('isActive');
             $table->longText('notes')->nullable();
             $table->integer('earlyPositionId')->index('FKpositions650197')->nullable();

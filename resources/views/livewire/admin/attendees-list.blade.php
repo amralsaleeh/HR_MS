@@ -17,50 +17,226 @@
 
     <div class="content">
         <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card card-primary card-outline">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-end">
-                            <button wire:click.prevent="show_new_employer_form" class="btn btn-primary">
-                                <i class="fa fa-plus-circle mr-2"></i> Import Fingerprints Log
-                            </button>
+            {{-- Boxes --}}
+            <div class="row">
+                <div class="col-4" role="button" wire:click="show_all_attendees">
+                    <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3> {{ $attendCount }} </h3>
+                        <p>All Employees Attendees: <b>{{ $firstDate }}</b> - <b>{{ $secondDate }}</b></p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-4" role="button" wire:click="show_good_attendees">
+                    <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3> {{ $goodAttendeesCount }} </h3>
+                        <p>Good Employees Attendees: <b>{{ $firstDate }}</b> - <b>{{ $secondDate }}</b></p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-4" role="button" wire:click="show_bad_attendees">
+                    <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3> {{ $badAttendeesCount }} </h3>
+                        <p>Bad Employees Attendees: <b>{{ $firstDate }}</b> - <b>{{ $secondDate }}</b></p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa-solid fa-thumbs-down"></i>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            {{-- Main --}}
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card card-primary card-outline">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="modal-title">Filter Data Between</h5>
+                            </div>
+                        </div>
+                        <div class="card-body d-flex justify-content-between">
+                            <div class="form-group col-md-6">
+                                <label for="firstDate">Start Date</label>
+                                <input wire:model="firstDate" type="date" class="form-control" id="firstDate">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="secondDate">End Date</label>
+                                <input wire:model="secondDate" type="date" class="form-control" id="secondDate">
+                            </div>
                         </div>
                     </div>
-                    <div class="card-body">
+                </div>
+                <div class="col-lg-12">
+                    <div class="card card-primary card-outline">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-end">
+                                <button wire:click.prevent="show_attendees_form" class="btn btn-primary">
+                                    <i class="fa-solid fa-table mr-2"></i> Import Fingerprints From Excel
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
 
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Full name</th>
-                                <th scope="col">Remaining days</th>
-                                <th scope="col">Options</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($employees as $employee)
-                                    <tr>
-                                        <td>{{ @$employee->id }}</td>
-                                        <td>{{ @$employee->fullname }}</td>
-                                        <td> 5 </td>
-                                        <td>
-                                            <a wire:click.prevent="show_edit_employer_form( {{ $employee }} )" href=""><i class="fa-solid fa-eye mr-2"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">LogIn</th>
+                                    <th scope="col">LogOut</th>
+                                    <th scope="col">Duration</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @if($isAttendees)
+                                    @foreach ($attendees as $attendee)
+                                        <tr>
+                                            <td>{{$attendee->employeeId}}</td>
+                                            <td>{{$attendee->name}}</td>
+                                            <td>{{$attendee->logDate->format('Y-m-d')}}</td>
+                                            <td>{{date("H:i:s",$attendee->logIn)}}</td>
+                                            <td>{{date("H:i:s",$attendee->logOut)}}</td>
+                                            <td>{{date("H:i:s",$attendee->duration)}}</td>
+                                        </tr>
+                                    @endforeach
+                                    @endif
 
-                    <div class="card-footer d-flex justify-content-centerid">
-                        {{ $attendees->links() }}
+                                    @if($isGoodAttendees)
+                                    @foreach ($goodAttendees as $goodAttendee)
+                                        <tr>
+                                            <td>{{$goodAttendee->employeeId}}</td>
+                                            <td>{{$goodAttendee->name}}</td>
+                                            <td>{{$goodAttendee->logDate->format('Y-m-d')}}</td>
+                                            <td>{{date("H:i:s",$goodAttendee->logIn)}}</td>
+                                            <td>{{date("H:i:s",$goodAttendee->logOut)}}</td>
+                                            <td>{{date("H:i:s",$goodAttendee->duration)}}</td>
+                                        </tr>
+                                    @endforeach
+                                    @endif
+
+                                    @if($isBadAttendees)
+                                    @foreach ($badAttendees as $badAttendee)
+                                        <tr>
+                                            <td>{{$badAttendee->employeeId}}</td>
+                                            <td>{{$badAttendee->name}}</td>
+                                            <td>{{$badAttendee->logDate->format('Y-m-d')}}</td>
+                                            <td>{{date("H:i:s",$badAttendee->logIn)}}</td>
+                                            <td>{{date("H:i:s",$badAttendee->logOut)}}</td>
+                                            <td>{{date("H:i:s",$badAttendee->duration)}}</td>
+                                        </tr>
+                                    @endforeach
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="card-footer d-flex justify-content-centerid">
+                            @if($isAttendees)
+                            {{ $attendees->links() }}
+                            @endif
+                            @if($isBadAttendees)
+                            {{ $badAttendees->links() }}
+                            @endif
+                            @if($isGoodAttendees)
+                            {{ $goodAttendees->links() }}
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
     </div>
+
+    <!-- Attendees form  -->
+        <div wire:ignore.self class="modal fade" id="attendees-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <form
+                    action="{{ route('import') }}"
+                    method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                    <span>Import Attendees</span>
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-row">
+                                <div class="form-group col">
+                                    <label for="file">Choose File</label>
+                                    <input type="file" name="file" class="form-control" id="file">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancel</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i>
+                                    <span>Import File</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {{-- Error Modal HTML --}}
+        @if(count($errors) > 0)
+            @foreach($errors->all() as $error)
+            <div id="errorModal" class="modal fade">
+                <div class="modal-dialog modal-error">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="icon-box">
+                                <i class="material-icons fa fa-times" aria-hidden="true"></i>
+                            </div>
+                            <h4 class="modal-title">Sorry</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-center">{{$error}}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger btn-block" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        @endif
+
+        {{-- Confirm Modal HTML --}}
+        @if($message = Session::get('success'))
+            <div id="confirmModal" class="modal fade">
+                <div class="modal-dialog modal-confirm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="icon-box">
+                                <i class="material-icons fa fa-check" aria-hidden="true"></i>
+                            </div>
+                            <h4 class="modal-title">Success</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-center">{{$message}}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-success btn-block" data-dismiss="modal" id="button">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
 
     {{-- Employer form --}}
     {{-- <div wire:ignore.self class="modal fade" id="employer-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -213,4 +389,5 @@
           </div>
         </div>
     </div> --}}
+
 </div>

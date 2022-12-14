@@ -23,7 +23,7 @@ class ImportEmployee implements ToModel, WithStartRow
             'nationalNumber' => $row[7],
             'degree' => $row[8],
             'gender' => $row[9],
-            'mobile' => $row[10],
+            'phoneNumber' => $row[10],
             'positionId' => $row[11],
             'startDate' => $row[12],
             'address' => $row[13],
@@ -35,7 +35,7 @@ class ImportEmployee implements ToModel, WithStartRow
 
         ]);
     }
-     
+
     public function startRow(): int
     {
         return 2;

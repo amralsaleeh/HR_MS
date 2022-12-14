@@ -14,15 +14,13 @@ class ImportAttendance implements ToModel, WithStartRow
     {
         return new Attendee([
             'employeeId' => $row[0],
-            'name' => $row[1],
-            'logDate' => $row[2],
-            'logTime' => $row[3],
-            'logIn' => $row[4],
-            'logOut' => $row[5],
-            'duration' => $row[6],
+            'logDate' => $row[1],
+            'logTime' => $row[2],
+            'logIn' => $row[3],
+            'logOut' => $row[4],
+            'duration' => $row[5],
         ]);
     }
-
 
     public function startRow(): int
     {

@@ -20,26 +20,26 @@
         {{-- Boxes --}}
         <div class="row">
             <div class="col-lg-4 col-4">
-                <div class="small-box bg-success">
+                <div class="small-box bg-info">
                 <div class="inner">
                     <h3> {{ $positions->total() }} </h3>
 
                     <p>All Positions</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
+                    <i class="fa-solid fa-map-pin"></i>
                 </div>
                 </div>
             </div>
             <div class="col-lg-4 col-4">
-                <div class="small-box bg-info">
+                <div class="small-box bg-success">
                 <div class="inner">
                     <h3> {{ $positions->total() }} </h3>
 
                     <p>All Vacancies</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
+                    <i class="fa-solid fa-computer"></i>
                 </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                     <p>Empty Vacancies</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
+                    <i class="fa-solid fa-triangle-exclamation"></i>
                 </div>
                 </div>
             </div>

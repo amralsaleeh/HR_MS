@@ -35,6 +35,12 @@ class EmployeesList extends Component
         ]);
     }
 
+    // Show import form
+    public function show_import_form()
+    {
+        $this->dispatchBrowserEvent('show_import_form');
+    }
+
     // Show new form
     public function show_new_employer_form()
     {
@@ -48,28 +54,34 @@ class EmployeesList extends Component
     public function new_employer()
     {
         $validatedData =  Validator::make($this->perInfo, [
-            'id' => 'required',
-            'nationalnumber' => 'required|unique:employees',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'fathername' => 'required',
-            'mothername' => 'required',
-            'birthdate' => 'required',
+            'id' => 'required|unique:employees',
+            'nationalNumber' => 'required|unique:employees',
+            'firstName' => 'required',
+            'fatherName' => 'required',
+            'lastName' => 'required',
+            'motherName' => 'required',
+            'degree' => 'nullable',
+            'address' => 'nullable',
+            'phoneNumber' => 'required|unique:employees',
+            'birthAndPlace' => 'required',
             'gender' => 'required',
-            'positionid' => 'required',
-            'departmentid' => 'required',
-            'centerid' => 'required',
-            'startdate' => 'required',
-            'phonenumber' => 'required|unique:employees',
+            'startDate' => 'required',
+            'quitDate' => 'required',
+            'isActive' => 'required',
+            'notes' => 'nullable',
+            'earlyPositionId' => 'nullable',
+            'positionId' => 'required',
+            'departmentId' => 'required',
+            'centerId' => 'required',
         ])-> validate();
 
         // $validatedData['password'] = bcrypt($validatedData['password']);
-        $validatedData['firstname'] = ucfirst($validatedData['firstname']);
-        $validatedData['fathername'] = ucfirst($validatedData['fathername']);
-        $validatedData['lastname'] = ucfirst($validatedData['lastname']);
-        $validatedData['mothername'] = ucfirst($validatedData['mothername']);
+        $validatedData['firstName'] = ucfirst($validatedData['firstName']);
+        $validatedData['fatherName'] = ucfirst($validatedData['fatherName']);
+        $validatedData['lastName'] = ucfirst($validatedData['lastName']);
+        $validatedData['motherName'] = ucfirst($validatedData['motherName']);
 
-        $validatedData['fullname'] = $validatedData['firstname']  . ' ' . $validatedData['fathername'] . ' ' .  $validatedData['lastname'];
+        $validatedData['fullName'] = $validatedData['firstName']  . ' ' . $validatedData['fatherName'] . ' ' .  $validatedData['lastName'];
         Employee::create($validatedData);
 
         $this->dispatchBrowserEvent('hide_employer_form', ['message' => 'Employee added successfully']);
@@ -89,27 +101,33 @@ class EmployeesList extends Component
     public function edit_employer()
     {
         $validatedData =  Validator::make($this->perInfo, [
-            'id' => 'required',
-            'nationalnumber' => 'required|unique:employees,phoneNumber,'.$this->employee->id,
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'fathername' => 'required',
-            'mothername' => 'required',
-            'birthdate' => 'required',
+            'id' => 'required|unique:employees',
+            'nationalNumber' => 'required|unique:employees',
+            'firstName' => 'required',
+            'fatherName' => 'required',
+            'lastName' => 'required',
+            'motherName' => 'required',
+            'degree' => 'nullable',
+            'address' => 'nullable',
+            'phoneNumber' => 'required|unique:employees',
+            'birthAndPlace' => 'required',
             'gender' => 'required',
-            'positionid' => 'required',
-            'departmentid' => 'required',
-            'centerid' => 'required',
-            'startdate' => 'required',
-            'phonenumber' => 'required|unique:employees,phoneNumber,'.$this->employee->id,
+            'startDate' => 'required',
+            'quitDate' => 'required',
+            'isActive' => 'required',
+            'notes' => 'nullable',
+            'earlyPositionId' => 'nullable',
+            'positionId' => 'required',
+            'departmentId' => 'required',
+            'centerId' => 'required',
         ])-> validate();
 
-        $validatedData['firstname'] = ucfirst($validatedData['firstname']);
-        $validatedData['fathername'] = ucfirst($validatedData['fathername']);
-        $validatedData['lastname'] = ucfirst($validatedData['lastname']);
-        $validatedData['mothername'] = ucfirst($validatedData['mothername']);
+        $validatedData['firstName'] = ucfirst($validatedData['firstName']);
+        $validatedData['fatherName'] = ucfirst($validatedData['fatherName']);
+        $validatedData['lastName'] = ucfirst($validatedData['lastName']);
+        $validatedData['motherName'] = ucfirst($validatedData['motherName']);
 
-        $validatedData['fullname'] = $validatedData['firstname']  . ' ' . $validatedData['fathername'] . ' ' .  $validatedData['lastname'];
+        $validatedData['fullname'] = $validatedData['firstName']  . ' ' . $validatedData['fatherName'] . ' ' .  $validatedData['lastName'];
 
         $this->employee->update($validatedData);
 

@@ -17,10 +17,10 @@ class CreateAttendeesTable extends Migration
             $table->integer('id', true);
             $table->integer('employeeId')->index('FKattendees76090');
             $table->date('logDate');
-            $table->date('logTime');
-            $table->time('login');
-            $table->time('logout');
-            $table->time('duration');
+            $table->string('logTime')->nullable();
+            $table->time('login')->nullable();
+            $table->time('logout')->nullable();
+            $table->time('duration')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
         });
