@@ -19,9 +19,9 @@ class ImportAttendance implements ToModel, WithStartRow
                 'employeeId' => $column[0],
                 'logDate' => $column[1],
                 'logTime' => $column[2],
-                // 'login' => $column[3],
-                // 'logout' => $column[4],
-                // 'duration' => $column[5],
+                'login' => $column[3],
+                'logout' => $column[4],
+                'duration' => $column[5],
             ]);
         }
     }
