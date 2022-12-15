@@ -32,8 +32,7 @@ Route::get('/', AdminController::class)->name('dashboard');
 Route::get('dashboard', DashboardList::class)->name('dashboard');
 
 Route::get('attendees', AttendeesList::class)->name('attendees');
-// Route::post('/import_attendees',[AttendanceController::class,'import_attendees'])->name('import_attendees');
-Route::post('/import',[AttendanceController::class,'import'])->name('import');  // Change name please
+Route::post('/import_attendees',[AttendanceController::class,'import_attendees'])->name('import_attendees');
 
 Route::get('discount', DiscountList::class)->name('discount');
 

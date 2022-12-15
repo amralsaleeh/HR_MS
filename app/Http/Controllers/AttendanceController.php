@@ -10,7 +10,7 @@ use App\Models\Attendee;
 class AttendanceController extends Controller
 {
 
-        public function import(Request $request){
+        public function import_attendees(Request $request){
 
         $this->validate($request, [
             'file'  => 'required|mimes:xls,xlsx'

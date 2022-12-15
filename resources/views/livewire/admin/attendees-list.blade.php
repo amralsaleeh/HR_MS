@@ -160,7 +160,7 @@
         <div wire:ignore.self class="modal fade" id="attendees-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <form
-                    action="{{ route('import') }}"
+                    action="{{ route('import_attendees') }}"
                     method="POST"
                     enctype="multipart/form-data">
                     @csrf
