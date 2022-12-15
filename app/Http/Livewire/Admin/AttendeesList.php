@@ -21,13 +21,24 @@ class AttendeesList extends Component
 
     public function render()
     {
-        $attendCount = Attendee::all()->unique('employee_id')->whereBetween('logDate' ,[$this->firstDate,$this->secondDate])->count();
-        $goodAttendeesCount = Attendee::all()->unique('employee_id')->whereBetween('logDate' ,[$this->firstDate,$this->secondDate])->where('duration', '>=', strtotime('06:30:00'))->count();
-        $badAttendeesCount = Attendee::all()->unique('employee_id')->whereBetween('logDate' ,[$this->firstDate,$this->secondDate])->where('duration', '<', strtotime('06:30:00'))->count();
+        $attendCount = Attendee::all()->unique('employeeId')->whereBetween('logDate' ,[$this->firstDate,$this->secondDate])->count();
+        $goodAttendeesCount = Attendee::all()->unique('employeeId')->whereBetween('logDate' ,[$this->firstDate,$this->secondDate])->where('duration', '>=', '06:30:00')->count();
+        $badAttendeesCount = Attendee::all()->unique('employeeId')->whereBetween('logDate' ,[$this->firstDate,$this->secondDate])->where('duration', '<', '06:30:00')->count();
 
-        $attendees = Attendee::whereBetween('logDate' ,[$this->firstDate,$this->secondDate])->paginate(3);
-        $goodAttendees = Attendee::whereBetween('logDate' ,[$this->firstDate,$this->secondDate])->where('duration', '>=', '06:30:00')->paginate(3);
-        $badAttendees = Attendee::whereBetween('logDate' ,[$this->firstDate,$this->secondDate])->where('duration', '<', '06:30:00')->paginate(3);
+        // $attendees = Attendee::whereBetween('logDate' ,[$this->firstDate,$this->secondDate])->paginate(3);
+        $attendees = DB::table('attendees')
+            ->join('employees', 'employees.id', '=', 'attendees.employeeId')
+            ->whereBetween('logDate' ,[$this->firstDate,$this->secondDate])->paginate(3);
+
+        // $goodAttendees = Attendee::whereBetween('logDate' ,[$this->firstDate,$this->secondDate])->where('duration', '>=', '06:30:00')->paginate(3);
+        $goodAttendees = DB::table('attendees')
+            ->join('employees', 'employees.id', '=', 'attendees.employeeId')
+            ->whereBetween('logDate' ,[$this->firstDate,$this->secondDate])->where('duration', '>=', '06:30:00')->paginate(3);
+
+        // $badAttendees = Attendee::whereBetween('logDate' ,[$this->firstDate,$this->secondDate])->where('duration', '<', '06:30:00')->paginate(3);
+        $badAttendees = DB::table('attendees')
+            ->join('employees', 'employees.id', '=', 'attendees.employeeId')
+            ->whereBetween('logDate' ,[$this->firstDate,$this->secondDate])->where('duration', '<=', '06:30:00')->paginate(3);
 
         return view('livewire.admin.attendees-list', [
             'attendCount' => $attendCount,
@@ -39,22 +50,22 @@ class AttendeesList extends Component
         ]);
     }
 
+    public function show_all_attendees(){
+        $this->isAttendees = true;
+        $this->isGoodAttendees = false;
+        $this->isBadAttendees = false;
+    }
+
     public function show_good_attendees(){
-         $this->isGoodAttendees = true;
-         $this->isAttendees = false;
-         $this->isBadAttendees = false;
+        $this->isAttendees = false;
+        $this->isGoodAttendees = true;
+        $this->isBadAttendees = false;
     }
 
     public function show_bad_attendees(){
-        $this->isGoodAttendees = false;
         $this->isAttendees = false;
-        $this->isBadAttendees = true;
-    }
-
-    public function show_all_attendees(){
         $this->isGoodAttendees = false;
-        $this->isAttendees = true;
-        $this->isBadAttendees = false;
+        $this->isBadAttendees = true;
     }
 
     public function show_attendees_form()

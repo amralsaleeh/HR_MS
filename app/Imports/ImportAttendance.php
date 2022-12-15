@@ -10,15 +10,15 @@ use Maatwebsite\Excel\Concerns\WithStartRow;
 class ImportAttendance implements ToModel, WithStartRow
 {
 
-    public function model(array $row)
+    public function model(array $column)
     {
         return new Attendee([
-            'employeeId' => $row[0],
-            'logDate' => $row[1],
-            'logTime' => $row[2],
-            'logIn' => $row[3],
-            'logOut' => $row[4],
-            'duration' => $row[5],
+            'employeeId' => $column[0],
+            'logDate' => $column[1],
+            'logTime' => $column[2],
+            'login' => $column[3],
+            'logout' => $column[4],
+            'duration' => $column[5],
         ]);
     }
 

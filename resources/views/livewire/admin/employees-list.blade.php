@@ -90,8 +90,8 @@
                                         <td>+963-{{ @$employee->phoneNumber }}</td>
                                         <td>
                                             <a wire:click.prevent="show_edit_employer_form( {{ $employee }} )" href=""><i class="fa fa-edit mr-2"></i></a>
-                                            <a wire:click.prevent="{{-- EDIT HERE --}}" href=""><i class="fa-solid fa-link-slash text-warning mr-2"></i></a>
-                                            <a wire:click.prevent="show_conformation_model( {{ $employee->id }} )" href=""><i class="fa fa-trash text-danger"></i></a>
+                                            <a wire:click.prevent="show_unlink_conformation_model( {{ $employee->id }} )" href=""><i class="fa-solid fa-link-slash text-warning mr-2"></i></a>
+                                            <a wire:click.prevent="show_delete_conformation_model( {{ $employee->id }} )" href=""><i class="fa fa-trash text-danger"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -414,7 +414,7 @@
     </div>
 
     {{-- Conformation model --}}
-    <div wire:ignore.self class="modal fade" id="conformation-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="delete-conformation-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">

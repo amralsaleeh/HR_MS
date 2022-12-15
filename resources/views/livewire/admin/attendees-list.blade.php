@@ -91,8 +91,8 @@
                                     <th scope="col">ID</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Date</th>
-                                    <th scope="col">LogIn</th>
-                                    <th scope="col">LogOut</th>
+                                    <th scope="col">Login</th>
+                                    <th scope="col">Logout</th>
                                     <th scope="col">Duration</th>
                                 </tr>
                                 </thead>
@@ -101,11 +101,11 @@
                                     @foreach ($attendees as $attendee)
                                         <tr>
                                             <td>{{$attendee->employeeId}}</td>
-                                            <td>{{$attendee->name}}</td>
-                                            <td>{{$attendee->logDate->format('Y-m-d')}}</td>
-                                            <td>{{date("H:i:s",$attendee->logIn)}}</td>
-                                            <td>{{date("H:i:s",$attendee->logOut)}}</td>
-                                            <td>{{date("H:i:s",$attendee->duration)}}</td>
+                                            <td>{{$attendee->fullName}}</td>
+                                            <td>{{$attendee->logDate}}</td>
+                                            <td>{{$attendee->login}}</td>
+                                            <td>{{$attendee->logout}}</td>
+                                            <td>{{$attendee->duration}}</td>
                                         </tr>
                                     @endforeach
                                     @endif
@@ -114,11 +114,11 @@
                                     @foreach ($goodAttendees as $goodAttendee)
                                         <tr>
                                             <td>{{$goodAttendee->employeeId}}</td>
-                                            <td>{{$goodAttendee->name}}</td>
-                                            <td>{{$goodAttendee->logDate->format('Y-m-d')}}</td>
-                                            <td>{{date("H:i:s",$goodAttendee->logIn)}}</td>
-                                            <td>{{date("H:i:s",$goodAttendee->logOut)}}</td>
-                                            <td>{{date("H:i:s",$goodAttendee->duration)}}</td>
+                                            <td>{{$goodAttendee->fullName}}</td>
+                                            <td>{{$goodAttendee->logDate}}</td>
+                                            <td>{{$goodAttendee->login}}</td>
+                                            <td>{{$goodAttendee->logout}}</td>
+                                            <td>{{$goodAttendee->duration}}</td>
                                         </tr>
                                     @endforeach
                                     @endif
@@ -127,11 +127,11 @@
                                     @foreach ($badAttendees as $badAttendee)
                                         <tr>
                                             <td>{{$badAttendee->employeeId}}</td>
-                                            <td>{{$badAttendee->name}}</td>
-                                            <td>{{$badAttendee->logDate->format('Y-m-d')}}</td>
-                                            <td>{{date("H:i:s",$badAttendee->logIn)}}</td>
-                                            <td>{{date("H:i:s",$badAttendee->logOut)}}</td>
-                                            <td>{{date("H:i:s",$badAttendee->duration)}}</td>
+                                            <td>{{$badAttendee->fullName}}</td>
+                                            <td>{{$badAttendee->logDate}}</td>
+                                            <td>{{$badAttendee->login}}</td>
+                                            <td>{{$badAttendee->logout}}</td>
+                                            <td>{{$badAttendee->duration}}</td>
                                         </tr>
                                     @endforeach
                                     @endif

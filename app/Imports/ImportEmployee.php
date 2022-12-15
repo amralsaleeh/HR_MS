@@ -10,29 +10,28 @@ use Maatwebsite\Excel\Concerns\WithStartRow;
 class ImportEmployee implements ToModel, WithStartRow
 {
 
-    public function model(array $row)
+    public function model(array $column)
     {
         return new Employee([
-            'id' => $row[0],
-            'fullName' => $row[1],
-            'firstName' => $row[2],
-            'lastName' => $row[3],
-            'fatherName' => $row[4],
-            'motherName' => $row[5],
-            'birthAndPlace' => $row[6],
-            'nationalNumber' => $row[7],
-            'degree' => $row[8],
-            'gender' => $row[9],
-            'phoneNumber' => $row[10],
-            'positionId' => $row[11],
-            'startDate' => $row[12],
-            'address' => $row[13],
-            'earlyPositionId' => $row[14],
-            'departmentId' => $row[15],
-            'centerId' => $row[16],
-            'quitDate' => $row[17],
-            'notes' => $row[18],
-
+            'id' => $column[0],
+            'fullName' => $column[1],
+            'firstName' => $column[2],
+            'lastName' => $column[3],
+            'fatherName' => $column[4],
+            'motherName' => $column[5],
+            'birthAndPlace' => $column[6],
+            'nationalNumber' => $column[7],
+            'degree' => $column[8],
+            'gender' => $column[9],
+            'phoneNumber' => $column[10],
+            'positionId' => $column[11],
+            'startDate' => $column[12],
+            'address' => $column[13],
+            'earlyPositionId' => $column[14],
+            'departmentId' => $column[15],
+            'centerId' => $column[16],
+            'quitDate' => $column[17],
+            'notes' => $column[18],
         ]);
     }
 

@@ -134,12 +134,27 @@ class EmployeesList extends Component
         $this->dispatchBrowserEvent('hide_employer_form', ['message' => 'Employee updated successfully']);
     }
 
-    // Conformation
-    public function show_conformation_model($employeeId)
+    // Unlink conformation
+    public function show_unlink_conformation_model($employeeId)
     {
         $this->deleteEmployeeId = $employeeId;
+        $this->dispatchBrowserEvent('show_delete_conformation_model');
+    }
 
-        $this->dispatchBrowserEvent('show_conformation_model');
+    // Unlink
+    public function unlink_employee()
+    {
+        $employee = Employee::findOrFail($this->deleteEmployeeId);
+        // EDIT HERE
+
+        $this->dispatchBrowserEvent('hide_conformation_model', ['message' => 'Employee unlink successfully']);
+    }
+
+    // Delete conformation
+    public function show_delete_conformation_model($employeeId)
+    {
+        $this->deleteEmployeeId = $employeeId;
+        $this->dispatchBrowserEvent('show_delete_conformation_model');
     }
 
     // Delete

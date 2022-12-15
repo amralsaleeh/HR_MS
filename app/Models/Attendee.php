@@ -11,11 +11,10 @@ class Attendee extends Model
 
     protected $fillable = [
         'employeeId',
-        'name',
         'logDate',
         'logTime',
-        'logIn',
-        'logOut',
+        'login',
+        'logout',
         'duration',
     ];
 
@@ -26,15 +25,14 @@ class Attendee extends Model
 
     protected $casts = [
         'employeeId' => 'integer',
-        'name' => 'string',
         'logDate' => 'date',
         'logTime' => 'string',
-        'logIn' => 'timestamp',
-        'logOut' => 'timestamp',
+        'login' => 'timestamp',
+        'logout' => 'timestamp',
         'duration' => 'timestamp',
     ];
 
-    public function employee(){
-        return $this->belongsTo('App\Employee');
-    }
+    // public function employee(){
+    //     return $this->belongsTo('App\Employee');
+    // }
 }

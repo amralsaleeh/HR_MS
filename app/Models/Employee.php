@@ -30,7 +30,6 @@ class Employee extends Model
         'positionId',
         'departmentId',
         'centerId',
-
     ];
 
     protected $hidden = [

@@ -16,7 +16,6 @@ class AttendanceController extends Controller
             'file'  => 'required|mimes:xls,xlsx'
            ]);
 
-
         Excel::import(new ImportAttendance,
                       $request->file('file')->store('files'));
 
