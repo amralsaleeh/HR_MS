@@ -10,6 +10,7 @@ class Attendee extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'employeeId',
         'logDate',
         'logTime',

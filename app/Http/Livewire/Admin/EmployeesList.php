@@ -20,6 +20,7 @@ class EmployeesList extends Component
     public $employee;
     public $perInfo=[];
     public $showEditEmployerForm = false;
+    public $unlinkEmployeeId = null;
     public $deleteEmployeeId = null;
 
     // Render
@@ -82,6 +83,7 @@ class EmployeesList extends Component
         $validatedData['motherName'] = ucfirst($validatedData['motherName']);
 
         $validatedData['fullName'] = $validatedData['firstName']  . ' ' . $validatedData['fatherName'] . ' ' .  $validatedData['lastName'];
+
         Employee::create($validatedData);
 
         $this->dispatchBrowserEvent('hide_employer_form', ['message' => 'Employee added successfully']);
@@ -101,15 +103,15 @@ class EmployeesList extends Component
     public function edit_employer()
     {
         $validatedData =  Validator::make($this->perInfo, [
-            'id' => 'required|unique:employees',
-            'nationalNumber' => 'required|unique:employees',
+            'id' =>'required|unique:employees,id,'.$this->employee->id,
+            'nationalNumber' => 'required|unique:employees,nationalNumber,'.$this->employee->id,
             'firstName' => 'required',
             'fatherName' => 'required',
             'lastName' => 'required',
             'motherName' => 'required',
             'degree' => 'nullable',
             'address' => 'nullable',
-            'phoneNumber' => 'required|unique:employees',
+            'phoneNumber' => 'required|unique:employees,phoneNumber,'.$this->employee->id,
             'birthAndPlace' => 'required',
             'gender' => 'required',
             'startDate' => 'required',
@@ -127,7 +129,7 @@ class EmployeesList extends Component
         $validatedData['lastName'] = ucfirst($validatedData['lastName']);
         $validatedData['motherName'] = ucfirst($validatedData['motherName']);
 
-        $validatedData['fullname'] = $validatedData['firstName']  . ' ' . $validatedData['fatherName'] . ' ' .  $validatedData['lastName'];
+        $validatedData['fullName'] = $validatedData['firstName']  . ' ' . $validatedData['fatherName'] . ' ' .  $validatedData['lastName'];
 
         $this->employee->update($validatedData);
 
@@ -137,17 +139,17 @@ class EmployeesList extends Component
     // Unlink conformation
     public function show_unlink_conformation_model($employeeId)
     {
-        $this->deleteEmployeeId = $employeeId;
-        $this->dispatchBrowserEvent('show_delete_conformation_model');
+        $this->unlinkEmployeeId = $employeeId;
+        $this->dispatchBrowserEvent('show_unlink_conformation_model');
     }
 
     // Unlink
     public function unlink_employee()
     {
-        $employee = Employee::findOrFail($this->deleteEmployeeId);
-        // EDIT HERE
+        $employee = Employee::findOrFail($this->unlinkEmployeeId);
 
-        $this->dispatchBrowserEvent('hide_conformation_model', ['message' => 'Employee unlink successfully']);
+        $updated = Employee::where('id' , '=', $employee->id)->update(['isActive' => 0]);
+        $this->dispatchBrowserEvent('hide_unlink_conformation_model', ['message' => 'Employee unlink successfully']);
     }
 
     // Delete conformation

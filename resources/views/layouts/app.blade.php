@@ -265,13 +265,13 @@
         $('#employer-form').modal('hide');
         toastr.success(event.detail.message, 'Success!');
     })
-    // window.addEventListener('show_unlink_conformation_model', event => {
-    //     $('#unlink-conformation-model').modal('show');
-    // })
-    // window.addEventListener('hide_unlink_conformation_model', event => {
-    //     $('#unlink-conformation-model').modal('hide');
-    //     toastr.success(event.detail.message, 'Success!');
-    // })
+    window.addEventListener('show_unlink_conformation_model', event => {
+        $('#unlink-conformation-model').modal('show');
+    })
+    window.addEventListener('hide_unlink_conformation_model', event => {
+        $('#unlink-conformation-model').modal('hide');
+        toastr.success(event.detail.message, 'Success!');
+    })
     window.addEventListener('show_delete_conformation_model', event => {
         $('#delete-conformation-model').modal('show');
     })

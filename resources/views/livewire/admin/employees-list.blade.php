@@ -413,7 +413,28 @@
         </div>
     </div>
 
-    {{-- Conformation model --}}
+    {{-- Unlink conformation model --}}
+    <div wire:ignore.self class="modal fade" id="unlink-conformation-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Unlink employer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Are you sure you want to Unlink this employer?</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i>Cancel</button>
+                <button wire:click.prevent="unlink_employee( {{ $employee }} )" type="button" class="btn btn-warning"><i class="fa-solid fa-link-slash mr-1"></i>Unlink</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Delete conformation model --}}
     <div wire:ignore.self class="modal fade" id="delete-conformation-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -434,7 +455,7 @@
         </div>
     </div>
 
-    {{-- Error Modal HTML --}}
+    {{-- Error Modal Alert --}}
 	@if(count($errors) > 0)
         @foreach($errors->all() as $error)
         <div id="errorModal" class="modal fade">
@@ -458,7 +479,7 @@
         @endforeach
     @endif
 
-    {{-- Confirm Modal HTML --}}
+    {{-- Confirm Modal Alert --}}
     @if($message = Session::get('success'))
     <div id="confirmModal" class="modal fade">
         <div class="modal-dialog modal-confirm">

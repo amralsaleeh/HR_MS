@@ -15,13 +15,32 @@ class ImportAttendance implements ToModel, WithStartRow
     {
         if(Carbon::parse($column[1])->isWeekday())
         {
+            if( $column[2] != "" ){
+                $login = substr($column[2], 0, 5);
+                $logout = substr($column[2], -5);
+
+                $duration = Carbon::parse($login)->diff(Carbon::parse($logout));
+                $duration = $duration->h . ":" . $duration->i;
+
+                if( $logout == $login ){
+                    $logout = null;
+                    $duration = null;
+                }
+            }
+            else{
+                $column[2] = null;
+                $login = null;
+                $logout = null;
+                $duration = null;
+            }
+
             return new Attendee([
                 'employeeId' => $column[0],
                 'logDate' => $column[1],
                 'logTime' => $column[2],
-                'login' => $column[3],
-                'logout' => $column[4],
-                'duration' => $column[5],
+                'login' => $login,
+                'logout' => $logout,
+                'duration' => $duration,
             ]);
         }
     }
