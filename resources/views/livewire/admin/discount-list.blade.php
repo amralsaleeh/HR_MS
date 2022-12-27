@@ -81,17 +81,7 @@
                                             <td>{{$mustBeCheckedCase->employeeId}}</td>
                                             <td>{{ $this->get_name_by_id( $mustBeCheckedCase->employeeId ) }}</td>
                                             <td>{{$mustBeCheckedCase->mustVerifiedCases}}</td>
-                                            {{-- <td> - </td> --}}
-                                            {{-- <td>
-                                                @if($mustBeCheckedCase->IsExcuseCount)
-                                                    {{$mustBeCheckedCase->IsExcuseCount}}
-                                                @else
-                                                    -
-                                                @endif
-                                            </td>
-                                            <td> - </td> --}}
-                                            {{-- <td>{{$mustBeCheckedCase->mustVerifiedCases - $mustBeCheckedCase->IsExcuseCount}}</td> --}}
-                                            <td></td>
+                                            <td>{{$mustBeCheckedCase->discountsDays . ' D - ' . $mustBeCheckedCase->discountsHours . ' H'}}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
