@@ -72,7 +72,7 @@
                                     {{-- <th scope="col">Duration Must Be Verified!</th> --}}
                                     {{-- <th scope="col">Explained Days</th>
                                     <th scope="col">Explained Duration</th> --}}
-                                    <th scope="col">Discounts Days</th>
+                                    <th scope="col">Discounts</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -81,7 +81,14 @@
                                             <td>{{$mustBeCheckedCase->employeeId}}</td>
                                             <td>{{ $this->get_name_by_id( $mustBeCheckedCase->employeeId ) }}</td>
                                             <td>{{$mustBeCheckedCase->mustVerifiedCases}}</td>
-                                            <td>{{$mustBeCheckedCase->discountsDays . ' D - ' . $mustBeCheckedCase->discountsHours . ' H'}}</td>
+                                            <td>
+                                                <?php
+                                                echo $mustBeCheckedCase->discountsDays . " D";
+                                                // {{dd($mustBeCheckedCase->discountsHours);}}
+                                                if($mustBeCheckedCase->discountsHours != 0 )
+                                                    echo " - " . gmdate('H', $mustBeCheckedCase->discountsHours) . ":" . gmdate('i', $mustBeCheckedCase->discountsHours) . " H" ;
+                                                ?>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

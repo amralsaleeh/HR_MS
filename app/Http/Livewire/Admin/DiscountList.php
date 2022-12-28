@@ -18,8 +18,8 @@ class DiscountList extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $firstDate = '2022/12/1';
-    public $secondDate = '2022/12/31';
+    public $firstDate = '2022/11/1';
+    public $secondDate = '2022/11/31';
 
     public $employee;
     public $unexplainedRows;
@@ -44,6 +44,7 @@ class DiscountList extends Component
 
         // $this->mustBeCheckedCases->where('employeeId', '222')->first()->discountsDays=9999;
 
+        // Start justification check //
         $this->unexplainedRows = DB::table('employees')
             ->join('attendees', 'attendees.employeeId', '=', 'employees.id')
             // ->select('attendees.id', 'attendees.employeeId', 'employees.fullName')
@@ -52,6 +53,89 @@ class DiscountList extends Component
             ->orWhere('duration', '<=', '6:25:00')
             // ->whereNull('isExcuse')
             ->get();
+
+        foreach($this->unexplainedRows as $unexplainedRow)
+        {
+            $employeeDailyVacations = Dailyvacation::where('employeeId', '=', $unexplainedRow->employeeId)
+                    ->whereBetween('from' ,[$this->firstDate,$this->secondDate])
+                    ->whereBetween('to' ,[$this->firstDate,$this->secondDate])
+                    ->get();
+            $employeeDailyTasks = Dailytask::where('employeeId', '=', $unexplainedRow->employeeId)
+                ->whereBetween('from' ,[$this->firstDate,$this->secondDate])
+                ->whereBetween('to' ,[$this->firstDate,$this->secondDate])
+                ->get();
+
+            $employeeHourlyVacations = Hourlyvacation::where('employeeId', '=', $unexplainedRow->employeeId)
+                ->whereBetween('vacationDate', [$this->firstDate,$this->secondDate])
+                ->get();
+            $employeeHourlyTasks = Hourlytask::where('employeeId', '=', $unexplainedRow->employeeId)
+                ->whereBetween('taskDate', [$this->firstDate,$this->secondDate])
+                ->get();
+
+            if($unexplainedRow->duration == null)
+            {
+                foreach($employeeDailyVacations as $employeeDailyVacation)
+                {
+                    if ($unexplainedRow->logDate >= $employeeDailyVacation->from && $unexplainedRow->logDate <= $employeeDailyVacation->to)
+                    {
+                        $updated = Attendee::where('id' , '=', $unexplainedRow->id)->update(['isExcuse' => 1]);
+                    }
+                    else
+                    {
+                        $this->mustBeCheckedCases->where('employeeId', $unexplainedRow->employeeId)->first()->discountsDays++;
+                    }
+                }
+
+                foreach($employeeDailyTasks as $employeeDailyTask)
+                {
+                    if ($unexplainedRow->logDate >= $employeeDailyTask->from && $unexplainedRow->logDate <= $employeeDailyTask->to)
+                    {
+                        $updated = Attendee::where('id' , '=', $unexplainedRow->id)->update(['isExcuse' => 1]);
+                    }
+                    else
+                    {
+                        $this->mustBeCheckedCases->where('employeeId', $unexplainedRow->employeeId)->first()->discountsDays++;
+                    }
+                }
+
+                if($employeeDailyVacations->isEmpty() && $employeeDailyTasks->isEmpty())
+                {
+                    $this->mustBeCheckedCases->where('employeeId', $unexplainedRow->employeeId)->first()->discountsDays++;
+                }
+            }
+            elseif($unexplainedRow->duration <= '6:25:00')
+            {
+                foreach($employeeHourlyVacations as $employeeHourlyVacation)
+                {
+                    if ($unexplainedRow->logDate == $employeeHourlyVacation->vacationDate)
+                    {
+                        $this->mustBeCheckedCases->where('employeeId', $unexplainedRow->employeeId)->first()->discountsHours += Carbon::parse($employeeHourlyVacation->from)->diffInSeconds(Carbon::parse($employeeHourlyVacation->to));
+                    }
+                    else
+                    {
+                        // $this->mustBeCheckedCases->where('employeeId', $unexplainedRow->employeeId)->first()->discountsHours += Carbon::parse($unexplainedRow->duration)->diffInSeconds(Carbon::parse('6:25:00'));
+                    }
+                }
+
+                foreach($employeeHourlyTasks as $employeeHourlyTask)
+                {
+                    if ($unexplainedRow->logDate == $employeeHourlyTask->taskDate)
+                    {
+                        $this->mustBeCheckedCases->where('employeeId', $unexplainedRow->employeeId)->first()->discountsHours += Carbon::parse($employeeHourlyTask->from)->diffInSeconds(Carbon::parse($employeeHourlyTask->to));
+                    }
+                    else
+                    {
+                        // $this->mustBeCheckedCases->where('employeeId', $unexplainedRow->employeeId)->first()->discountsHours += Carbon::parse($unexplainedRow->duration)->diffInSeconds(Carbon::parse('6:25:00'));
+                    }
+                }
+
+                if($employeeHourlyVacations->isEmpty() && $employeeHourlyTasks->isEmpty())
+                {
+                    $this->mustBeCheckedCases->where('employeeId', $unexplainedRow->employeeId)->first()->discountsHours += Carbon::parse($unexplainedRow->duration)->diffInSeconds(Carbon::parse('6:30:00'));
+                }
+            }
+        }
+        // End justification check //
 
         return view('livewire.admin.discount-list', [
 
@@ -278,125 +362,4 @@ class DiscountList extends Component
 
     //     dd($this->totalDiscounts);
     // }
-
-    public function test()
-    {
-        $this->totalDiscounts = DB::table('attendees')
-            ->join('employees', 'employees.id', '=', 'attendees.employeeId')
-            ->select('employeeId', DB::raw("(COUNT(*)) as mustVerifiedCases"), DB::raw("SUM(isExcuse) as IsExcuseCount"))
-            ->whereBetween('logDate' ,[$this->firstDate,$this->secondDate])
-            ->whereNull('logTime')
-            ->orWhere('duration', '<=', '6:25:00')
-            ->groupBy('employeeId')
-            ->get();
-
-        foreach($this->totalDiscounts as $totalDiscount) {
-            $totalDiscount->discountsDays = 0;
-            $totalDiscount->discountsHours = 0;
-        }
-
-        foreach($this->mustBeCheckedCases as $mustBeCheckedCase)
-        {
-            for($i=1; $i <= $mustBeCheckedCase['mustVerifiedCases']; $i++)
-            {
-                $employeeDailyVacations = Dailyvacation::where('employeeId', '=', $mustBeCheckedCase['employeeId'])
-                    ->whereBetween('from' ,[$this->firstDate,$this->secondDate])
-                    ->whereBetween('to' ,[$this->firstDate,$this->secondDate])
-                    ->get();
-                $employeeDailyTasks = Dailytask::where('employeeId', '=', $mustBeCheckedCase['employeeId'])
-                    ->whereBetween('from' ,[$this->firstDate,$this->secondDate])
-                    ->whereBetween('to' ,[$this->firstDate,$this->secondDate])
-                    ->get();
-
-                $employeeHourlyVacations = Hourlyvacation::where('employeeId', '=', $mustBeCheckedCase['employeeId'])
-                    ->whereBetween('vacationDate', [$this->firstDate,$this->secondDate])
-                    ->get();
-                $employeeHourlyTasks = Hourlytask::where('employeeId', '=', $mustBeCheckedCase['employeeId'])
-                    ->whereBetween('taskDate', [$this->firstDate,$this->secondDate])
-                    ->get();
-
-                // $discountsDays = 0;
-                // $discountsHours = 0;
-
-                // $totalDuration = 0;
-
-                foreach($this->unexplainedRows as $unexplainedRow)
-                {
-                    if($mustBeCheckedCase['employeeId'] == $unexplainedRow['employeeId'])
-                    {
-                        if($unexplainedRow['duration'] == null)
-                        {
-                            foreach($employeeDailyVacations as $employeeDailyVacation)
-                            {
-                                if ($unexplainedRow['logDate'] >= $employeeDailyVacation['from'] && $unexplainedRow['logDate'] <= $employeeDailyVacation['to'])
-                                {
-                                    $updated = Attendee::where('id' , '=', $unexplainedRow['id'])->update(['isExcuse' => 1]);
-                                }
-                                else
-                                {
-                                    $this->totalDiscounts->where('employeeId', $unexplainedRow['employeeId'])->first()->discountsDays++;
-                                }
-                            }
-
-                            foreach($employeeDailyTasks as $employeeDailyTask)
-                            {
-                                if ($unexplainedRow['logDate'] >= $employeeDailyTask['from'] && $unexplainedRow['logDate'] <= $employeeDailyTask['to'])
-                                {
-                                    $updated = Attendee::where('id' , '=', $unexplainedRow['id'])->update(['isExcuse' => 1]);
-                                }
-                                else
-                                {
-                                    $this->totalDiscounts->where('employeeId', $unexplainedRow['employeeId'])->first()->discountsDays++;
-                                }
-                            }
-
-                            if($employeeDailyVacations->isEmpty() && $employeeDailyTasks->isEmpty())
-                            {
-                                $this->totalDiscounts->where('employeeId', $unexplainedRow['employeeId'])->first()->discountsDays++;
-                                // $discountsDays++;
-                            }
-                        }
-
-                        if($unexplainedRow['duration'] <= '6:25:00')
-                        {
-                            $totalDuration = 0;
-
-                            foreach($employeeHourlyVacations as $employeeHourlyVacation)
-                            {
-                                if ($unexplainedRow['logDate'] == $employeeHourlyVacation['vacationDate'])
-                                {
-                                    $totalDuration = $totalDuration + Carbon::parse($employeeHourlyVacation['from'])->diffInSeconds(Carbon::parse($employeeHourlyVacation['to']));
-                                }
-                                else
-                                {
-                                    // $discountsHours++;
-                                }
-                            }
-
-                            foreach($employeeHourlyTasks as $employeeHourlyTask)
-                            {
-                                if ($unexplainedRow['logDate'] == $employeeHourlyTask['taskDate'])
-                                {
-                                    $totalDuration = $totalDuration + Carbon::parse($employeeHourlyTask['from'])->diffInSeconds(Carbon::parse($employeeHourlyTask['to']));
-                                }
-                                else
-                                {
-                                    // $discountsHours++;
-                                }
-                            }
-                            // $totalDuration = gmdate('H', $totalDuration) . ":" . gmdate('i', $totalDuration) . ":" . gmdate('s', $totalDuration);
-                            // dd($totalDuration);
-                        }
-
-                        // $this->totalDiscounts->where('employeeId', $unexplainedRow['employeeId'])->first()->discountsDays += $discountsDays;
-                        // $this->totalDiscounts->where('employeeId', $unexplainedRow['employeeId'])->first()->discountsHours += 2;
-
-
-                    }
-                }
-            }
-        }
-
-        dd($this->totalDiscounts);
-    }
 }
