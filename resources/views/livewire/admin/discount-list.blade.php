@@ -56,9 +56,9 @@
                     <div class="card card-primary card-outline">
                         <div class="card-header">
                             <div class="d-flex justify-content-end">
-                                <button wire:click.prevent="test" class="btn btn-primary">
+                                {{-- <button wire:click.prevent="test" class="btn btn-primary">
                                     <i class="fa-solid fa-arrows-rotate mr-2"></i> Cases Justification Check
-                                </button>
+                                </button> --}}
                             </div>
                         </div>
                         <div class="card-body">
@@ -68,10 +68,9 @@
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Cases Must Be Checked!</th>
-                                    {{-- <th scope="col">Duration Must Be Verified!</th> --}}
-                                    {{-- <th scope="col">Explained Days</th>
-                                    <th scope="col">Explained Duration</th> --}}
+                                    <th scope="col">Total Cases</th>
+                                    <th scope="col">Excuse Cases</th>
+                                    <th scope="col">Unexcuse Cases</th>
                                     <th scope="col">Discounts</th>
                                 </tr>
                                 </thead>
@@ -81,6 +80,8 @@
                                             <td>{{$mustBeCheckedCase->employeeId}}</td>
                                             <td>{{ $this->get_name_by_id( $mustBeCheckedCase->employeeId ) }}</td>
                                             <td>{{$mustBeCheckedCase->mustVerifiedCases}}</td>
+                                            <td>{{$mustBeCheckedCase->excuse}}</td>
+                                            <td>{{$mustBeCheckedCase->unExcuse}}</td>
                                             <td>
                                                 <?php
                                                 echo $mustBeCheckedCase->discountsDays . " D";
