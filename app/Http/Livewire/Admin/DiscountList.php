@@ -79,7 +79,7 @@ class DiscountList extends Component
                     if ($unexplainedRow->logDate >= $employeeDailyVacation->from && $unexplainedRow->logDate <= $employeeDailyVacation->to)
                     {
                         $this->mustBeCheckedCases->where('employeeId', $unexplainedRow->employeeId)->first()->excuse++;
-                        $updated = Attendee::where('id' , '=', $unexplainedRow->id)->update(['isExcuse' => 1]);
+                        Attendee::where('id' , '=', $unexplainedRow->id)->update(['isExcuse' => 1]);
                     }
                     else
                     {
@@ -92,7 +92,7 @@ class DiscountList extends Component
                     if ($unexplainedRow->logDate >= $employeeDailyTask->from && $unexplainedRow->logDate <= $employeeDailyTask->to)
                     {
                         $this->mustBeCheckedCases->where('employeeId', $unexplainedRow->employeeId)->first()->excuse++;
-                        $updated = Attendee::where('id' , '=', $unexplainedRow->id)->update(['isExcuse' => 1]);
+                        Attendee::where('id' , '=', $unexplainedRow->id)->update(['isExcuse' => 1]);
                     }
                     else
                     {
@@ -108,7 +108,6 @@ class DiscountList extends Component
             }
             elseif($unexplainedRow->duration <= '6:25:00')
             {
-                $totalTime = 0;
                 $totalRemainingTime = Carbon::parse('6:30:00')->secondsSinceMidnight() - Carbon::parse($unexplainedRow->duration)->secondsSinceMidnight();
 
                 foreach($employeeHourlyVacations as $employeeHourlyVacation)
@@ -140,8 +139,7 @@ class DiscountList extends Component
                     $this->mustBeCheckedCases->where('employeeId', $unexplainedRow->employeeId)->first()->unExcuse++;
                     $this->mustBeCheckedCases->where('employeeId', $unexplainedRow->employeeId)->first()->discountsHours += $totalRemainingTime;
                 }
-
-                if($totalRemainingTime > 0)
+                elseif($totalRemainingTime > 0)
                 {
                     $this->mustBeCheckedCases->where('employeeId', $unexplainedRow->employeeId)->first()->unExcuse++;
                     $this->mustBeCheckedCases->where('employeeId', $unexplainedRow->employeeId)->first()->discountsHours += $totalRemainingTime;
@@ -152,6 +150,27 @@ class DiscountList extends Component
                 }
             }
         }
+
+        foreach($this->mustBeCheckedCases as $mustBeCheckedCase)
+        {
+            if($mustBeCheckedCase->discountsHours % 9000 == 0)
+            {
+                $this->mustBeCheckedCases->where('employeeId', $mustBeCheckedCase->employeeId)->first()->discountsDays += intdiv($mustBeCheckedCase->discountsHours, 9000);
+
+            }
+            elseif($mustBeCheckedCase->discountsHours % 9000 >= 1)
+            {
+                $this->mustBeCheckedCases->where('employeeId', $mustBeCheckedCase->employeeId)->first()->discountsDays += intdiv($mustBeCheckedCase->discountsHours, 9000);
+                Employee::where('id' , '=', $mustBeCheckedCase->employeeId)->update(['secondsAccumulator' => $mustBeCheckedCase->discountsHours % 9000]);
+            }
+            else
+            {
+                Employee::where('id' , '=', $mustBeCheckedCase->employeeId)->update(['secondsAccumulator' => $mustBeCheckedCase->discountsHours % 9000]);
+            }
+
+            $this->mustBeCheckedCases->where('employeeId', $mustBeCheckedCase->employeeId)->first()->discountsHours = Employee::where('id', $mustBeCheckedCase->employeeId)->get(['secondsAccumulator'])[0]->secondsAccumulator;
+        }
+
         // End justification check //
 
         return view('livewire.admin.discount-list', [
