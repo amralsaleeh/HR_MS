@@ -30,7 +30,7 @@ class DiscountList extends Component
     {
         $this->mustBeCheckedCases = DB::table('attendees')
             ->join('employees', 'employees.id', '=', 'attendees.employeeId')
-            ->select('employeeId', DB::raw("(COUNT(*)) as mustVerifiedCases"), DB::raw("SUM(isExcuse) as IsExcuseCount"))
+            ->select('employeeId', DB::raw("(COUNT(*)) as mustVerifiedCases"))
             ->whereBetween('logDate' ,[$this->firstDate,$this->secondDate])
             ->whereNull('logTime')
             ->orWhere('duration', '<=', '6:25:00')
@@ -156,7 +156,7 @@ class DiscountList extends Component
             if($mustBeCheckedCase->discountsHours % 9000 == 0)
             {
                 $this->mustBeCheckedCases->where('employeeId', $mustBeCheckedCase->employeeId)->first()->discountsDays += intdiv($mustBeCheckedCase->discountsHours, 9000);
-
+                Employee::where('id' , '=', $mustBeCheckedCase->employeeId)->update(['secondsAccumulator' => 0]);
             }
             elseif($mustBeCheckedCase->discountsHours % 9000 >= 1)
             {
