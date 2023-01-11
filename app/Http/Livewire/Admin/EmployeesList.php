@@ -67,7 +67,7 @@ class EmployeesList extends Component
             'birthAndPlace' => 'required',
             'gender' => 'required',
             'startDate' => 'required',
-            'quitDate' => 'required',
+            'quitDate' => 'nullable',
             'isActive' => 'required',
             'notes' => 'nullable',
             'earlyPositionId' => 'nullable',

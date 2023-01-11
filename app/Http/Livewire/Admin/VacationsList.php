@@ -5,8 +5,8 @@ namespace App\Http\Livewire\Admin;
 use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Employee;
-use App\Models\Dailyvacation;
-use App\Models\Hourlyvacation;
+use App\Models\DailyVacation;
+use App\Models\HourlyVacation;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -41,19 +41,19 @@ class VacationsList extends Component
     {
         $employees = Employee::paginate(10);
 
-        $dailyvacations = DB::table('dailyvacations')
-            ->join('employees', 'employees.id', '=', 'dailyvacations.employeeId')
+        $daily_vacations = DB::table('daily_vacations')
+            ->join('employees', 'employees.id', '=', 'daily_vacations.employeeId')
             ->get();
 
-        $hourlyvacations = DB::table('hourlyvacations')
-            ->join('employees', 'employees.id', '=', 'hourlyvacations.employeeId')
+        $hourly_vacations = DB::table('hourly_vacations')
+            ->join('employees', 'employees.id', '=', 'hourly_vacations.employeeId')
             ->get();
 
-        $dailyvacations = $dailyvacations->countBy('employeeId');
-        $hourlyvacations = $hourlyvacations->countBy('employeeId');
+        $daily_vacations = $daily_vacations->countBy('employeeId');
+        $hourly_vacations = $hourly_vacations->countBy('employeeId');
 
         return view('livewire.admin.vacations-list', [
-            'employees' => $employees, 'dailyvacations' => $dailyvacations, 'hourlyvacations' => $hourlyvacations,
+            'employees' => $employees, 'daily_vacations' => $daily_vacations, 'hourly_vacations' => $hourly_vacations,
         ]);
     }
 
@@ -117,7 +117,7 @@ class VacationsList extends Component
 
         $validatedData['duration'] = $this->dailyVacationDuration;
 
-        Dailyvacation::create($validatedData);
+        DailyVacation::create($validatedData);
 
         $this->dispatchBrowserEvent('hide_new_daily_vacation_form', ['message' => 'Vacation added successfully']);
     }
@@ -150,7 +150,7 @@ class VacationsList extends Component
         $validatedData['duration'] = Carbon::parse($validatedData['from'])->diff(Carbon::parse($validatedData['to']));
         $validatedData['duration'] = $validatedData['duration']->h . ":" . $validatedData['duration']->i;
 
-        Hourlyvacation::create($validatedData);
+        HourlyVacation::create($validatedData);
 
         $this->dispatchBrowserEvent('hide_new_hourly_vacation_form', ['message' => 'Vacation added successfully']);
     }
@@ -160,12 +160,12 @@ class VacationsList extends Component
     {
         $this->employeeVacationInfo = [];
 
-        $dailyvacations = DB::table('dailyvacations')
-            ->join('employees', 'employees.id', '=', 'dailyvacations.employeeId')
+        $daily_vacations = DB::table('daily_vacations')
+            ->join('employees', 'employees.id', '=', 'daily_vacations.employeeId')
             ->where('employeeId', '=', $employeeId)->get();
 
-        $hourlyvacations = DB::table('hourlyvacations')
-            ->join('employees', 'employees.id', '=', 'hourlyvacations.employeeId')
+        $hourly_vacations = DB::table('hourly_vacations')
+            ->join('employees', 'employees.id', '=', 'hourly_vacations.employeeId')
             ->where('employeeId', '=', $employeeId)->get();
 
         $this->dispatchBrowserEvent('show_employee_vacations_form');

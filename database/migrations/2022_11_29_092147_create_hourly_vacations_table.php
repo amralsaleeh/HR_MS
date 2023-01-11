@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHourlytasksTable extends Migration
+class CreateHourlyvacationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateHourlytasksTable extends Migration
      */
     public function up()
     {
-        Schema::create('hourlytasks', function (Blueprint $table) {
+        Schema::create('hourly_vacations', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->integer('employeeId')->index('FKhourlytasks833137');
+            $table->integer('employeeId')->index('FK_hourly_vacations100');
             $table->date('requestDate');
-            $table->date('taskDate');
+            $table->date('vacationDate');
             $table->time('from');
             $table->time('to');
             $table->time('duration');
-            $table->tinyInteger('type');
+            $table->integer('type');
             $table->string('reason');
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
@@ -35,6 +35,6 @@ class CreateHourlytasksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hourlytasks');
+        Schema::dropIfExists('hourlyvacations');
     }
 }

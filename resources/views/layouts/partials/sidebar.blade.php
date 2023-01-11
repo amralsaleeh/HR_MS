@@ -2,7 +2,7 @@
     <!-- Brand Logo -->
     <a href="dashboard" class="brand-link">
       <img src="{{ asset ('backend/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Human Resource - Sys</span>
+      <span class="brand-text font-weight-light" style="font-size: 17px;">HR - Management System</span>
     </a>
 
     <!-- Sidebar -->
@@ -37,7 +37,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item">
-                <a href="{{ route('dashboard') }}" class="nav-link {{ request()->is('dashboard') ? 'active' : '' }} ">
+                <a href="{{ route('dashboard') }}" class="nav-link {{ request()->is('dashboard') || request()->is('/') ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
                     Dashboard
@@ -99,13 +99,7 @@
             <li class="nav-item">
                 <a href="{{ route('vacations') }}" class="nav-link {{ request()->is('vacations') ? 'active' : '' }} ">
                   <i class="fa-solid fa-door-open nav-icon"></i>
-                  <p>Vacations</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('tasks') }}" class="nav-link {{ request()->is('tasks') ? 'active' : '' }} ">
-                  <i class="fas fa-walkie-talkie nav-icon"></i>
-                  <p>Tasks</p>
+                  <p>Vacations & Tasks</p>
                 </a>
             </li>
         </ul>

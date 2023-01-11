@@ -23,10 +23,10 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-end">
                             <button wire:click.prevent="show_new_daily_vacation_form" class="btn btn-primary mr-2">
-                                <i class="fa-solid fa-calendar-days mr-2"></i> Add Daily Vacation
+                                <i class="fa-solid fa-calendar-days mr-2"></i> Add Daily
                             </button>
                             <button wire:click.prevent="show_new_hourly_vacation_form" class="btn btn-primary">
-                                <i class="fa-solid fa-clock mr-2"></i> Add Hourly Vacation
+                                <i class="fa-solid fa-clock mr-2"></i> Add Hourly
                             </button>
                         </div>
                     </div>
@@ -36,15 +36,15 @@
                             <thead>
                             <tr>
                                 <th scope="col">Full name</th>
-                                <th scope="col">Vacations count</th>
+                                <th scope="col">Taken Vacations Count</th>
                                 <th scope="col">Options</th>
                             </tr>
                             </thead>
                             <tbody>
                                 @foreach ($employees as $employee)
                                     <tr>
-                                        <td>{{ @$employee->fullName }}</td>
-                                        <td>{{ $dailyvacations->get($employee->id) + $hourlyvacations->get($employee->id) }}</td>
+                                        <td>{{ $employee->fullName }}</td>
+                                        <td>{{ $daily_vacations->get($employee->id) + $hourly_vacations->get($employee->id) }}</td>
                                         <td>
                                             <a wire:click.prevent="show_employee_vacation_form( {{ $employee->id }} )" href=""><i class="fa-solid fa-folder-open"></i></a>
                                         </td>
@@ -156,12 +156,24 @@
                         <label for="type">Type</label>
                         <select wire:model.defer="dailyVacationInfo.type" class="custom-select rounded-0 @error('type') is-invalid @enderror" id="type">
                             <option selected>Choose Type:</option>
-                            <option value="0">Mangment</option>
-                            <option value="3">Death</option>
-                            <option value="4">Marriage</option>
-                            <option value="5">Health</option>
-                            <option value="6">Motherhood</option>
-                            <option value="7">Without salary</option>
+                            <optgroup label="Vacations:">
+                                <option value="100">Management</option>
+                                <option value="101">No Salary</option>
+                                <option value="102">Health (Report)</option>
+                                <option value="103">Health (Surgery)</option>
+                                <option value="150">Wedding</option>
+                                <option value="151">Motherhood</option>
+                                <option value="152">Pilgrimage</option>
+                                <option value="153">Death (0C)</option>
+                                <option value="154">Death (1C & 2C)</option>
+                            </optgroup>
+                            <optgroup label="Tasks:">
+                                <option value="200">Travel</option>
+                                <option value="201">Meeting</option>
+                                <option value="202">Training</option>
+                                <option value="203">Activity</option>
+                                <option value="204">Offset</option>
+                            </optgroup>
                         </select>
                             @error('type')
                         <div class="invalid-feedback">
@@ -284,9 +296,17 @@
                         <label for="type">Type</label>
                         <select wire:model.defer="hourlyVacationInfo.type" class="custom-select rounded-0 @error('type') is-invalid @enderror" id="type">
                             <option selected>Choose Type:</option>
-                            <option value="0">Mangment</option>
-                            <option value="1">Late</option>
-                            <option value="2">Bank</option>
+                            <optgroup label="Vacations:">
+                                <option value="500">Management</option>
+                                <option value="501">Bank</option>
+                            </optgroup>
+                            <optgroup label="Tasks:">
+                                <option value="600">Meeting</option>
+                                <option value="601">Training</option>
+                                <option value="602">Activity</option>
+                                <option value="603">Field</option>
+                                <option value="604">Offset</option>
+                            </optgroup>
                         </select>
                             @error('type')
                         <div class="invalid-feedback">
@@ -347,7 +367,7 @@
                             <tbody>
                                 @foreach ($employees as $employee)
                                     <tr>
-                                        <td>{{ $dailyvacations->get($employee->id) }}</td>
+                                        <td>{{ $daily_vacations->get($employee->id) }}</td>
                                         <td>
                                             <a wire:click.prevent="show_employee_vacation_form( {{ $employee->id }} )" href=""><i class="fa-solid fa-folder-open"></i></a>
                                         </td>
@@ -369,7 +389,7 @@
                             <tbody>
                                 @foreach ($employees as $employee)
                                     <tr>
-                                        <td>{{ $hourlyvacations->get($employee->id) }}</td>
+                                        <td>{{ $hourly_vacations->get($employee->id) }}</td>
                                         <td>
                                             <a wire:click.prevent="show_employee_vacation_form( {{ $employee->id }} )" href=""><i class="fa-solid fa-folder-open"></i></a>
                                         </td>

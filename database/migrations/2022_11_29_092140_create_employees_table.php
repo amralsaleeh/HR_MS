@@ -30,6 +30,9 @@ class CreateEmployeesTable extends Migration
             $table->date('quitDate')->nullable();
             $table->integer('isActive');
             $table->longText('notes')->nullable();
+            $table->integer('dueDays')->default('0');
+            $table->integer('hourlyAccumulator')->default('0');
+            $table->integer('delayAccumulator')->default('0');
             $table->integer('earlyPositionId')->index('FKpositions650197')->nullable();
             $table->integer('positionId')->index('FKpositions650198')->nullable();
             $table->integer('departmentId')->index('FKdepartmens839638')->nullable();
